@@ -6,27 +6,27 @@ theme: jekyll-theme-chirpy
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
-lang: en
+lang: ko-KR
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
-timezone: Asia/Shanghai
+timezone: Asia/Seoul
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: JeongHwarr # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: AI researcher / 완벽을 위해 미루기 보다는 일단 시작하기 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  개인적으로 공부하고 연구한 것을 정리하고 공유하는 블로그입니다 😄
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: ""
+url: "https://jeonghwarr.github.io"
 
 github:
-  username: github_username # change to your github username
+  username: jeongHwarr # change to your github username
 
 twitter:
   username: twitter_username # change to your twitter username
@@ -34,15 +34,15 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: JeongHwarr
+  email: green2368@naver.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
+    #- https://twitter.com/username # change to your twitter homepage
+    - https://github.com/jeongHwarr # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/jeonghwa-yoo-8403a716b
 
 # Site Verification Settings
 webmaster_verifications:
@@ -65,7 +65,7 @@ analytics:
 
 # Pageviews settings
 pageviews:
-  provider: # now only supports 'goatcounter'
+  provider: 'goatcounter' # now only supports 'goatcounter'
 
 # Prefer color scheme setting.
 #
@@ -85,10 +85,10 @@ theme_mode: # [light | dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: "https://chirpy-img.netlify.app"
+#img_cdn: "https://chirpy-img.netlify.app"
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "/commons/avatar.jpg"
+avatar: "/assets/img/profile.jpg"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
