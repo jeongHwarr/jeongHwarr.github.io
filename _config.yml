@@ -13,8 +13,10 @@ timezone: Asia/Seoul
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
+nickname: JeongHwarr
 
-title: JeongHwarr # the main title
+title: JeongHwarr의 작은 다락방 # the main title
+#title: JeongHwarr # the main title
 
 tagline: AI researcher / 완벽을 위해 미루기 보다는 일단 시작하기 # it will display as the sub-title
 
