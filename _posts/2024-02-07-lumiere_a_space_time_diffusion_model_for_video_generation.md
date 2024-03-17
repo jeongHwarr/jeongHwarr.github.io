@@ -61,15 +61,18 @@ _Make-a-Video 구조_
 다른 기존 접근 방식과 유사하게 T2I 모델을 베이스 모델로 활용하여서 T2I 모델이 갖는 장점은 그대로 가져왔습니다. 다만 기존 방식과의 차이점은 비디오 전체 시간 길이에 대해 한 번에 생성할 수 있는 구조로 UNet구조를 변경하였습니다. 이를 위해 공간(space)과 시간(time) 신호를 다운 샘플링하여 학습하였고, 대부분의 미디어에서 기존 방법들보다 더 긴 프레임을 생성할 수 있다고 합니다. (16fps에서 80프레임 혹은 5초 이상 영상)
 
 다시 한 번 기존 접근 방식과 논문에서 제안하는 접근 방식의 차이점을 그림으로 나타내면 아래와 같습니다.
+
 - 기존 접근 방식 
-    ![스크린샷 2024-02-05 오후 3.28.18.png](/assets/images/2024-02-07-lumiere_a_space_time_diffusion_model_for_video_generation/2.png)
-    - 베이스 모델로부터 특정 프레임에 대해서만 비디오를 생성한다.
-    - TSR(Temporal Super Resolution)모델을 통해 보간하여 프레임을 채운다. 
-    - SSR(Spatial Super Resolution)모델을 통해 해상도를 증가 시킨다.
+  <br>
+  ![스크린샷 2024-02-05 오후 3.28.18.png](/assets/images/2024-02-07-lumiere_a_space_time_diffusion_model_for_video_generation/2.png)
+  - 베이스 모델로부터 특정 프레임에 대해서만 비디오를 생성한다.
+  - TSR(Temporal Super Resolution)모델을 통해 보간하여 프레임을 채운다. 
+  - SSR(Spatial Super Resolution)모델을 통해 해상도를 증가 시킨다.
   
 
 - 본 논문의 접근 방식
-    ![스크린샷 2024-02-05 오후 3.28.32.png](/assets/images/2024-02-07-lumiere_a_space_time_diffusion_model_for_video_generation/3.png)
+  <br>
+   ![스크린샷 2024-02-05 오후 3.28.32.png](/assets/images/2024-02-07-lumiere_a_space_time_diffusion_model_for_video_generation/3.png)
    - 모든 프레임에 대해 비디오를 생성한다.
    - SSR모델을 통해 해상도를 증가 시킨다.
    - MultiDiffusion 방법을 통해 각 프레임이 겹치는 영역을 처리한다. 
