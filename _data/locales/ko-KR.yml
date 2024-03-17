@@ -25,7 +25,7 @@ search:
 panel:
   lastmod: 최근 업데이트
   trending_tags: 인기 태그
-  toc: 바로가기
+  toc: Contents
 
 copyright:
   # Shown at the bottom of the post
@@ -35,7 +35,7 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: 일부 권리 보유
+  brief: Some rights reserved.
   verbose: >-
     명시되지 않는 한 이 사이트의 블로그 게시물은 작성자의
     Creative Commons Attribution 4.0 International(CC BY 4.0) 라이선스에 따라 사용이 허가되었습니다.
