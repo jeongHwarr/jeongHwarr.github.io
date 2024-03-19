@@ -68,7 +68,7 @@ CAS는 FID와 Inception Score와 마찬가지로 생성 모델이 만들어낸 �
 
 먼저 저자들은 text-to-image diffusion 모델로는 Imagen을 사용하였습니다. Text-to-image 모델을 어떻게 ImageNet 클래스와 alignment 할 지에 대한 고민이 필요했다고 합니다. 처음에는 CLIP에서 사용한 방법과 유사하게 짧은 텍스트를 ImageNet 클래스의 텍스트 프롬프트로 사용했다고 하였는데 이 경우에 성능이 좋지 않았다고 합니다. 이는 Imagen에서 high guidance weight를 사용하여 샘플의 다양성이 저하 되면서 생기는 현상일 수 있다고 합니다. 따라서, 저자들은 프롬프트를 한 두단어 클래스 이름으로 수정하고, 모델의 weight와 sampling parameter를 fine-tuning 했다고 합니다.  
 
-![스크린샷 2023-10-04 오전 12.51.04.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-04_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%258c%25e1%2585%25a5%25e1%2586%25ab_12.51.04.png)
+![스크린샷 2023-10-04 오전 12.51.04.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/2.png)
     
 왼쪽 그림이 fine-tuning이 적용된 Imagen이 만들어낸 이미지고, 오른쪽이 fine-tuning이 적용되지 않은 Imagen입니다. 아래에서 두 번째 클래스인 Schipperke를 보면, 이것은 스키퍼키라는 개 품종을 의미하는데 fine-tuning이 적용되지 않은 Imagen의 경우는 꽃과 같은 전혀 엉뚱한 이미지를 만들고 있는 것을 볼 수 있습니다. 
 
@@ -119,7 +119,7 @@ CAS는 FID와 Inception Score와 마찬가지로 생성 모델이 만들어낸 �
 
 각 샘플링 하이퍼파라미터에 대한 실험 결과는 아래와 같습니다. 
         
-![스크린샷 2023-10-09 오후 6.02.14.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_6.02.14.png)
+![스크린샷 2023-10-09 오후 6.02.14.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/4_2.png)
 왼쪽 그림이 1차 sweep에 대한 결과고, 가운데와 오른쪽 그림이 2차 sweep에 대한 결과로 guidance weight에 따른 FID, IS, CAS를 나타낸 결과입니다. 
 
 
@@ -129,7 +129,7 @@ CAS는 FID와 Inception Score와 마찬가지로 생성 모델이 만들어낸 �
     - Log-variance mixing coefficients: [0,1, 0.3]
     - Denose steps: [129, 500, 1000]
         
-![스크린샷 2023-10-09 오후 7.42.49.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_7.42.49.png) 
+![스크린샷 2023-10-09 오후 7.42.49.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/4_2_2.png) 
 위 그래프는 guidance weight를 1.0으로 설정하고 noise condition 파라미터를 변경했을 때 FID와 CAS의 그래프를 나타낸 그래프입니다. CAS 같은 경우는 logvar coeff가 0.3일 때 전반적으로 좋은 성능을 보였으며, FID 같은 경우도 logvar coeff가 0.3일 때 전반적으로 좋은 성능을 보인 것을 알 수 있습니다.  
 
 <br>
@@ -156,13 +156,13 @@ CAS는 FID와 Inception Score와 마찬가지로 생성 모델이 만들어낸 �
 ### 5-1. Sample Quality: FID and IS
 먼저, 합성된 데이터의 품질을 합성 태스크에서 많이 사용되는 지표인 FID와 IS의 관점으로 봅니다. 
 
-![스크린샷 2023-10-09 오후 10.51.25.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_10.51.25.png)
+![스크린샷 2023-10-09 오후 10.51.25.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/5_1_1.png)
 
 위 표에서 볼 수 있듯이, 본 논문의 파인 튜닝된 Imagen이 ImageNet에 대한 데이터 생성에 대해 다른 베이스모델들 보다 FID와 IS가 뛰어난 것을 알 수 있습니다. 이는 64x64 resolution과 256x256 resolution에서 모두 해당되었습니다. 
 
 ### 5.2. Classification Accuracy Score
 이 부분은 CAS 성능 지표를 통해 본 논문에서 제안한 모델의 데이터 합성 능력을 확인하는 부분입니다. 
-![스크린샷 2023-10-09 오후 11.04.11.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_11.04.11.png)
+![스크린샷 2023-10-09 오후 11.04.11.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/5_1_2.png)
 
 Figure 5에서 파란색 부분은 실제 학습 데이터로 학습된 모델의 분류 성능이고, 빨간색 부분은 합성된 데이터로 학습된 모델의 분류 성능입니다. 왼쪽 그림은 베이스라인 중 하나인 CDM 모델의 성능을 나타낸 그림이며, 가운데는 본 논문에서 256x256 resolution 모델의 성능, 오른쪽은 본 논문에서 제안한 1024x1024 resolution 모델의 성능을 나타낸 것입니다. 빨간색 부분이 파란색 부분보다 전반적으로 위쪽에 위치하면 모델의 성능이 좋다고 해석할 수 있습니다. 이 그림을 통해 본 논문에서 제안한 모델들이 베이스라인보다 좋은 성능을 보인다는 것을 알 수 있습니다. 
 
@@ -171,18 +171,18 @@ Table 2에서도 마찬가지로 본 논문 모델이 다른 베이스 모델보
 ### 5.3. Classification Accuracy with Different Models
 이 부분은 합성된 데이터를 여러 종류의 모델로 학습 시켰을 때, 각 모델의 분류 성능을 확인하는 부분입니다. CAS와 비슷하지만 CAS에서는 ResNet50 모델로 분류 성능을 확인했지만 여기서는 ResNet50 이외에 모델로도 분류 성능을 본다는 차이점이 있습니다. 
 
-![스크린샷 2023-10-09 오후 11.10.14.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_11.10.14.png)
+![스크린샷 2023-10-09 오후 11.10.14.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/5_1_3.png)
 
 위 표에서 확인할 수 있듯이, 다양한 모델에 대해서 분류 정확도를 살펴본 결과 생성된 데이터로만 학습될 경우에는 실제 데이터로 학습할 때 보다 성능이 낮았지만, 실제 데이터와 생성된 데이터를 합쳐서 학습할 경우 실제 데이터만 사용했을 때보다 성능이 증가한 것을 볼 수 있습니다. 이것은 onvNet기반 모델과 transformer 기반 모델에 대해서 동일한 양상을 보였습니다. 
 
 ### 5.4. Merging Real and Synthetic Data at Scale
 이 부분은 합성 데이터 규모에 따른 ResNet-50의 성능을 분석한 부분입니다. 
     
-![스크린샷 2023-10-09 오후 11.17.30.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_11.17.30.png)
+![스크린샷 2023-10-09 오후 11.17.30.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/5_4.png)
 
 64x64 이미지의 경우 생성되는 데이터의 양이 증가함에 따라 성능이 지속적으로 향상되는 것을 볼 수 있습니다. 
 
-![스크린샷 2023-10-09 오후 11.15.10.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/%25e1%2584%2589%25e1%2585%25b3%25e1%2584%258f%25e1%2585%25b3%25e1%2584%2585%25e1%2585%25b5%25e1%2586%25ab%25e1%2584%2589%25e1%2585%25a3%25e1%2586%25ba_2023-10-09_%25e1%2584%258b%25e1%2585%25a9%25e1%2584%2592%25e1%2585%25ae_11.15.10.png)
+![스크린샷 2023-10-09 오후 11.15.10.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/5_4_2.png)
 
 하지만 다른 resolution에 대해서는 다른 양상을 보였습니다. 학습 데이터가 4.8M 규모가 될 때까지는 합성 데이터를 추가하는 것이 분류 성능에 좋았으나, 합성 데이터를 더 늘려 그 이상의 규모가 되었을 때는 오히려 성능이 떨어지는 것을 볼 수 있었습니다.  
 
