@@ -4,13 +4,13 @@ subtitle:
 categories: Review
 date: 2023-12-01 02:50:43 +0900
 tags:
-  - difussion model
+  - Difussion model
   - h-space
-  - image editing
-  - asyrp
-  - gan
-  - generative ai
-  - image generating
+  - Image Editing
+  - Asyrp
+  - GAN
+  - Generative AI
+  - Image Generating
 toc: true
 toc_sticky: true
 math: true
