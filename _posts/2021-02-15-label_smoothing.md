@@ -115,4 +115,4 @@ class LabelSmoothingLoss(nn.Module):
 - [https://medium.com/towards-artificial-intelligence/how-to-use-label-smoothing-for-regularization-aa349f7f1dbb](https://medium.com/towards-artificial-intelligence/how-to-use-label-smoothing-for-regularization-aa349f7f1dbb)
 - [https://ratsgo.github.io/insight-notes/docs/interpretable/smoothing](https://ratsgo.github.io/insight-notes/docs/interpretable/smoothing)
 - [C. Szegedy, et al, "Rethinking the Inception Architecture for Computer Vision," 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Las Vegas, NV, 2016, pp. 2818-2826, doi: 10.1109/CVPR.2016.308.](https://arxiv.org/abs/1512.00567)
-- [http://www.gisdeveloper.co.kr/?p=8668](http://www.gisdeveloper.co.kr/?p=8668)
+- [https://www.gisdeveloper.co.kr/?p=8668](https://www.gisdeveloper.co.kr/?p=8668)
