@@ -4,11 +4,11 @@ subtitle: Make-A-Video
 categories: Review
 date: 2023-11-26 15:53:42 +0900
 tags:
-  - make-a-video
-  - text-to-video
-  - imagen
-  - t2v
-  - video generation
+  - Make-a-video
+  - Text-to-Video
+  - Imagen
+  - T2V
+  - Video Generation
 toc: true
 toc_sticky: true
 math: true
