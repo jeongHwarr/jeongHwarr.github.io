@@ -8,7 +8,7 @@ export function toc() {
       headingSelector: 'h1, h2, h3, h4',
       orderedList: false,
       scrollSmooth: false,
-      collapseDepth: 6, //unfold all list
+      collapseDepth: 6 //unfold all list
     });
   }
 }
