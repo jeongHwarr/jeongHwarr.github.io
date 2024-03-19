@@ -6,9 +6,9 @@ date: 2024-02-07 16:02:35 +0900
 tags:
   - Lumiere
   - T2V
-  - text-to-video
-  - google research
-  - generative models
+  - Text-to-Video
+  - Google Research
+  - Generative Models
 toc: true
 toc_sticky: false
 math: true
@@ -27,7 +27,6 @@ math: true
 - 해당 문제를 해결하기 위해 비디오를 전체 시간에 대해 한 번에 생성할 수 있는 새로운 U-net 구조를 제안한다. 
 - 베이스 모델로는 사전 학습된 텍스트-이미지 디퓨전 모델인 Imagen을 활용하였다.
 - text-to-video에 대해서 SOTA를 달성하고, 다양한 분야에서 활용될 수 있음을 보여주었다.
-
 
 ![스크린샷 2024-02-05 오후 3.14.07.png](/assets/images/2024-02-07-lumiere_a_space_time_diffusion_model_for_video_generation/1.png)
 
