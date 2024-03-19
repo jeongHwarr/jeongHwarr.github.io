@@ -78,7 +78,7 @@ PE_{(pos,2i+1)}=cos(\frac{pos}{10000^\frac{2i}{d_{model}}})$$
 
 - Self-attention을 하나의 그림으로 나타내면 아래와 같습니다. <b>Query와 key를 dot product한 값을 key의 dimension 정보를 이용하여 노멀라이즈하여 softmax에 넣어 attention score를 구합니다. 그 attention score와 value를 dot product하여 나온 결과를 같은 query에서 나온 값끼리 합쳐 z를 구합니다.</b>
   ![/assets/images/2021-07-23-transformer/untitled_4.png](/assets/images/2021-07-23-transformer/untitled_4.png)
-  _출처: [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)_
+  _출처: [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)_
 
 <br>
 ## 2-3 Multi-Head Attention
@@ -131,5 +131,5 @@ Encoder에서 일어나는 동작은 아래와 같습니다.
 - [Attention is all you need (original paper)](https://arxiv.org/pdf/1706.03762.pdf)
 - [https://www.youtube.com/watch?v=mxGCEWOxfe8](https://www.youtube.com/watch?v=mxGCEWOxfe8)
 - [Transforemr 설명 영상](https://www.youtube.com/watch?v=mxGCEWOxfe8)
-- [http://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
+- [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
 - [https://medium.com/platfarm/어텐션-메커니즘과-transfomer-self-attention-842498fd3225](https://medium.com/platfarm/%EC%96%B4%ED%85%90%EC%85%98-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98%EA%B3%BC-transfomer-self-attention-842498fd3225)
