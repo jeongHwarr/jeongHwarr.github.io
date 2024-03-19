@@ -107,7 +107,7 @@ class LabelSmoothingLoss(nn.Module):
 
 아래 코드를 보면 먼저 `.log_softmax` 함수를 통해 log softmax를 구합니다. 이것은 나중에 cross entropy loss를 계산하기 위함입니다. Log softmax와 target을 곱한 것의 음수를 취한 것이 cross entrophy loss가 됩니다. `true_dist.fill_(self.smoothing / (self.cls - 1))` 을 통해 $(1)$의 뒷항인 $\alpha/K$을 구합니다.  `scatter_` 함수를 통해 target의 index에 해당하는 위치에 $(1-\alpha)$을 넣게 됩니다. 그렇게 만들어진 새로운 target의 `true_dist` 와 log softmax값이 들어간 `pred` 를 곱해 최종적인 cross entropy loss를 만듭니다. 
 
-위의 코드가 이해가 잘 안된다면 먼저 [이 글](http://www.gisdeveloper.co.kr/?p=8668)을 읽어보길 추천합니다. CrossEntropyLoss를 구현하는 여러 버전의 코드가 있습니다. 
+위의 코드가 이해가 잘 안된다면 먼저 [이 글](https://www.gisdeveloper.co.kr/?p=8668)을 읽어보길 추천합니다. CrossEntropyLoss를 구현하는 여러 버전의 코드가 있습니다. 
 
 ## 5. Reference
 
