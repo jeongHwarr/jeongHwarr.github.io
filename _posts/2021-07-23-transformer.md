@@ -131,5 +131,5 @@ Encoder에서 일어나는 동작은 아래와 같습니다.
 - [Attention is all you need (original paper)](https://arxiv.org/pdf/1706.03762.pdf)
 - [https://www.youtube.com/watch?v=mxGCEWOxfe8](https://www.youtube.com/watch?v=mxGCEWOxfe8)
 - [Transforemr 설명 영상](https://www.youtube.com/watch?v=mxGCEWOxfe8)
-- [http://jalammar.github.io/illustrated-transformer/](http://jalammar.github.io/illustrated-transformer/)
+- [http://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
 - [https://medium.com/platfarm/어텐션-메커니즘과-transfomer-self-attention-842498fd3225](https://medium.com/platfarm/%EC%96%B4%ED%85%90%EC%85%98-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98%EA%B3%BC-transfomer-self-attention-842498fd3225)
