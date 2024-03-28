@@ -17,11 +17,11 @@ math: true
 ---
 
 ## 💡 핵심 요약
-1. 기존 diffusion 모델에서 생성 과정을 제어할 때 발생했었던 문제를 해결하는 방법 제안
+1. 기존 디퓨전 모델에서 생성 과정을 제어할 때 발생했었던 문제를 해결하는 방법 제안
     - Asyrp을 제안하여 중간 변화가 상쇄되는 문제를 해결
 
-2. Diffusion 모델에서 이미지 생성 과정을 제어할 수 있는 semantic latent space인 h-space의 발견 
-   - GAN에서 latent space를 편집해서 이미지를 제어하는 것과 같이 diffusion 모델에서도 같은 방식으로 이미지를 제어할 수 있음)
+2. 디퓨전 모델에서 이미지 생성 과정을 제어할 수 있는 의미적 잠재 공간(semantic latent space)인 h-space의 발견 
+   - GAN에서 잠재 공간(latent space)을 편집해서 이미지를 제어하는 것과 같이 디퓨전 모델에서도 같은 방식으로 이미지를 제어할 수 있음
 
 3. 생성 과정의 프로세스를 Asyrp을 이용한 editing, 기존 denoising, quality boosting의 3단계로 나눠서 다양한 이미지를 생성하고 좋은 품질의 이미지를 생성하도록 함
 
@@ -33,15 +33,15 @@ math: true
 
 ![Untitled](/assets/images/2023-12-01-diffusion_models_already_have_a_semantic_latent_space/untitled.png)
 
-(a) Image guidance는 unconditional한 latent variable에 guiding image의 latent variable을 합치는 방식을 사용한다. 하지만, 가이드와 unconditional 결과 중에 어떤 속성을 반영할지 지정하는 것이 모호하고, 변화의 크기에 대한 직관적인 제어가 부족하다는 문제점이 있다. 
+(a) 이미지 가이던스(image guidance)는 무조건적(unconditional)인 잠재 변수(latent variable)에 가이드 이미지의 잠재 변수를 결합하는 방식을 사용한다. 그러나, 가이드와 무조건적인 결과 중에서 어떤 특성을 반영할지 명확히 지정하는 것이 모호하며, 변화의 크기를 직관적으로 제어하기 어렵다.
 
-(b) Classifier guidance는 diffusion model에 classifier를 추가하여 목표 클래스와 일치하도록 reverse process에서 latent variable에 classifier의 기울기를 부과하여 이미지를 조작한다. 이 방법은 classifier를 추가로 훈련해야 하고, 샘플링 중에 classifier를 통해 기울기를 계산하는 비용이 크다는 문제점이 있다. 
+(b) 분류기 가이던스(classifier guidance)는 디퓨전 모델에 분류기를 추가하여 목표 클래스와 일치하도록 역 과정에서 잠재 변수에 분류기의 기울기를 적용하여 이미지를 조작한다. 이 방법은 추가적으로 분류기를 훈련해야 하고, 샘플링 중에 분류기를 통해 기울기를 계산하는 데 비용이 많이 든다.
 
-본 논문에서는 frozen diffusion model의 semantic latent space를 발견하는 비대칭 역방향 프로세스(Asyrp)를 제안한다. 그렇게 해서 발견한 semantic latent space를 h-space라고 칭한다. 본 논문에서는 사전 훈련된 frozen diffusion model에서 semantic latent space를 최초로 발견하였다.
+본 논문에서는 frozen 디퓨전 모델의 의미적 잠재 공간(semantic latent space)를 발견하는 비대칭 역방향 프로세스(Asyrp)를 제안한다. 그렇게 해서 발견한 의미적 잠재 공간을 h-space라고 칭한다. 본 논문에서는 사전 훈련된 frozen 디퓨전 모델에서 의미적 잠재 공간을 최초로 발견하였다.
 
 ## 2. Background
 
-Sematnic latent space에 대해 이야기 하기 전에 DDIM의 reverse process 식을 살펴보는 것으로 시작한다. DDIM에서는 non-Markovian process를 이용해서,  DDPM의 forward process식을 다음과 같이 재정의한다. 
+의미적 잠재 공간에 대해 이야기 하기 전에 DDIM의 reverse process 식을 살펴보는 것으로 시작한다. DDIM에서는 non-Markovian 프로세스를 이용해서,  DDPM의 forward process식을 다음과 같이 재정의한다. 
 
 ### DDPM, DDIM
 
@@ -71,7 +71,7 @@ $$
 
 ### **Image Manipulation with CLIP**
 
-CLIP은 Image Encoder $E_I$와 Text Encoder $E_T$로 멀티모달 임베딩을 학습하며, 유사성은 이미지와 텍스트 간의 유사성을 나타낸다. Editied image와 target distription 사이의 코사인 거리를 이용한 directional loss를 이용하여 mode collapse없이 균일한 editing을 하였다. 
+CLIP은 이미지 인코더 $E_I$와 텍스트 인코더 $E_T$로 멀티모달 임베딩을 학습하며, 유사성은 이미지와 텍스트 간의 유사성을 나타낸다. Editied image와 target distription 사이의 코사인 거리를 이용한 directional loss를 이용하여 mode collapse없이 균일한 editing을 하였다. 
 
 $$
 \mathcal{L}_{direction} (x^{edit}, y^{target};x^{source},y^{source}) := 1 - \cfrac{\Delta I \cdot \Delta T}{\parallel\Delta I\parallel \parallel\Delta T\parallel}
@@ -123,7 +123,7 @@ $$
 
 ![Untitled](/assets/images/2023-12-01-diffusion_models_already_have_a_semantic_latent_space/untitled_5.png)
 
-x_t로 direction할 때는 원래 DDIM의 노이즈를 사용하고, x_0을 predict할 때는 shifted epsilon을 사용한
+$x_t$로 direction할 때는 원래 DDIM의 노이즈를 사용하고, $x_0$을 predict할 때는 shifted epsilon을 사용한다.
 
 ### 3.3 h-space
 
@@ -136,7 +136,9 @@ $h_t$를 이용한 샘플링 방정식은 아래와 같이 된다.
 
 ![Untitled](/assets/images/2023-12-01-diffusion_models_already_have_a_semantic_latent_space/untitled_7.png)
 
-위 식에서  $\epsilon_t^{\theta}(x_t|\Delta{h_t})$는 original featuremap $h_t$에 $\Delta{h_t}$를 추가한다.
+
+위 식에서 
+$$\epsilon_t^{\theta}(x_t|\Delta{h_t})$$은 original featuremap $h_t$에 $\Delta{h_t}$를 추가한다.
 
 h-space는 다음과 같은 속성을 가지고 있다. 
 
@@ -170,9 +172,7 @@ h-space는 다음과 같은 속성을 가지고 있다.
 
 ![스크린샷 2023-12-01 오전 1.59.50.png](/assets/images/2023-12-01-diffusion_models_already_have_a_semantic_latent_space/4_1.png)
 
-편집 간격이 짧을수록 $\xi_t$가 낮아지고, 편집 간격이 길수록 결과 이미지에 더 많은 변화가 생긴다. 충분한 변화를 줄 수 있는 한에서 가장 최소의 Editing interval을 찾는 것이 $t_{edit}$을 결정하는 최고의 방법이다. 저자들은 실험적인 결과를 통해 $\mathrm{LPIPS}(x, \mathrm{P}_t)$ *= 0.33*인 t시점을 *$t_{edit}$*으로 결정하였다.
-
- 저자들은 실험을 통해 $\text{LIPPS}(x,P_{t_{edit}})=0.33$인 t시점을 $*t_{edit}*$으로 결정하였다. 이 지점이 충분한 변화를 줄 수 있으면서 가장 최소의 editing interval이었다. 
+편집 간격이 짧을수록 $\xi_t$가 낮아지고, 편집 간격이 길수록 결과 이미지에 더 많은 변화가 생긴다. 충분한 변화를 줄 수 있는 한에서 가장 최소의 Editing interval을 찾는 것이 $t_{edit}$을 결정하는 최고의 방법이다. 저자들은 실험적인 결과를 통해 $$\mathrm{LPIPS}(x, \mathrm{P}_t)$$ = 0.33인 t시점을 *$t_{edit}$*으로 결정하였다. 이 지점이 충분한 변화를 줄 수 있으면서 가장 최소의 editing interval이었다. 
 
 아래의 그림은 다양한 $\mathrm{LPIPS}(x, \mathrm{P}{t_{edit}})$에 따른 생성 결과를 나타낸 그림이다.
 
