@@ -87,7 +87,8 @@ math: true
 - 고해상도 이미지를 만들기 위해 사용한 네트워크
     - A prior Network $P$: 텍스트 임베딩 $x_e$와 BPE encoded text tokens $\hat{x}$이 주어졌을 때 이미지 임베딩 $y_e$를 생성하는 네트워크
     - Decoder Network $D$: 이미지 임베딩 $y_e$로부터 저해상도 64X64 RGB 이미지 $\hat{y}_l$를 생성하는 네트워크
-    - Super-resolution network $SR_l$, $SR_h$: D에서 생성된 이미지 64X64 저해상도 이미지 $\hat{y}_l$를 256X256, 768X768 픽셀로 증가시켜 최종 이미지 $\hat{y}$를 만드는 네트워크
+    - Super-resolution network $$SR_l$$, $$SR_h$$: D에서 생성된 이미지 64X64 저해상도 이미지 $ \hat{y}_l $를 256X256, 768X768 픽셀로 증가시켜 최종 이미지 $ \hat{y}$를 만드는 네트워크
+  
     ![/assets/images/2023-11-26-make_a_video_text_to_video_generation_without_text_video_data/make_a_video_architecture.png](/assets/images/2023-11-26-make_a_video_text_to_video_generation_without_text_video_data/make_a_video_architecture.png)
     _text $x$가 prior $P$를 통해 image embedding 변환된다. fps: desired frame rate._
 
@@ -120,7 +121,7 @@ math: true
     
     - $h$: 입력 텐서 (dimension: $B$(batch),$C$(channels),$F$(frames),$H$(height),$W$(width))
     - $\text{o}T$: transpose operator (spatial ↔ temporal)
-    - $Conv_{2_D}$는 pretrained T2I 모델에서 초기화 되고, $Conv_{1_D}$는 identity 함수로 초기화 된다.
+    - $$Conv_{2_D}$$는 pretrained T2I 모델에서 초기화 되고, $$Conv_{1_D}$$는 identity 함수로 초기화 된다.
 
 #### 3.2.2. Psuedo-3D attention layers
 
