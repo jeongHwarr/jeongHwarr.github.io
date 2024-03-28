@@ -124,19 +124,16 @@ CAS는 FID와 Inception Score와 마찬가지로 생성 모델이 만들어낸 �
 
 
 이제 다음으로는 64x64 → 256x256 super-resolution 모델에 대해 하이퍼파라미터를 선택하는 부분에 대해 설명하겠습니다. 하이퍼파라미터의 range는 아래와 같습니다. 
-    - Guidance weight: [1.0, 2.0, 5.0, 10.0, 30.0]
-    - Noise conditioning augmentation: [0.0, 0.1, 0.2, 0.3, 0.4]
-    - Log-variance mixing coefficients: [0,1, 0.3]
-    - Denose steps: [129, 500, 1000]
-        
+- Guidance weight: [1.0, 2.0, 5.0, 10.0, 30.0]
+- Noise conditioning augmentation: [0.0, 0.1, 0.2, 0.3, 0.4]
+- Log-variance mixing coefficients: [0,1, 0.3]
+- Denose steps: [129, 500, 1000]
+     
 ![스크린샷 2023-10-09 오후 7.42.49.png](/assets/images/2023-11-06-synthetic_data_from_diffusion_models_improves_imagenet_classification/4_2_2.png) 
+
 위 그래프는 guidance weight를 1.0으로 설정하고 noise condition 파라미터를 변경했을 때 FID와 CAS의 그래프를 나타낸 그래프입니다. CAS 같은 경우는 logvar coeff가 0.3일 때 전반적으로 좋은 성능을 보였으며, FID 같은 경우도 logvar coeff가 0.3일 때 전반적으로 좋은 성능을 보인 것을 알 수 있습니다.  
 
-<br>
-
 샘플링 하이퍼파라미터의 결과를 분석해보자면, 전반적으로 FID와 CAS는 높은 상관관계가 있으며 (Figure 4 참고), guidance weight가 작을수록 CAS는 높아지지만, Inception Score에는 부정적인 영향을 주며 (Figure 3 참고), noise augmentation이 0일 때 FID가 가장 작은 것을 볼 수 있습니다. (Figure 4 참고) 
-
-<br>
 
 이런 하이퍼파라미터 설정 방법을 기준으로 본 논문에서 최종적으로 설정한 값은 아래와 같다고 합니다.
 - Guidance weight
