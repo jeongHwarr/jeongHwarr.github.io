@@ -197,8 +197,7 @@ Temporal Layer는 연속된 이미지 프레인 간의 부드러운 전환을 �
 ### 4.2 Qualitative Results
 
 
-![4](/assets/img/2024-04-14-[논문리뷰]-Animate-Anyone:--Consistent-and-Controllable-Image-to-Video-Synthesis-for-Character-Animation.md/4.png)
-_맨 왼쪽 이미지: 레퍼런스 이미지 _
+![4](/assets/img/2024-04-14-[논문리뷰]-Animate-Anyone:--Consistent-and-Controllable-Image-to-Video-Synthesis-for-Character-Animation.md/4.png)_맨 왼쪽 이미지: 레퍼런스 이미지_
 
 
 전신이 나오는 캐릭터, 절반 길이의 초상화, 카툰 캐릭터, 인간형 캐릭터에 대해서 애니메이션을 생성하게 되었고,  결과 레퍼런스 이미지와 유사한 시간적 일관성(temporal consistency)을 보이는 사실적인 결과가 생성되었다고 합니다.  
