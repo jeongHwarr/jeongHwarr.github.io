@@ -2,7 +2,7 @@
 layout: post
 date: 2024-04-14
 title: "[논문리뷰] Animate Anyone:  Consistent and Controllable Image-to-Video Synthesis for Character Animation"
-tags: [Animated Anyone, AI Animation, Generative AI, Diffusion, ]
+tags: [Animated Anyone, AI Animation, Generative AI, Diffusion, Image-to-Video]
 categories: [Review, ]
 toc: true
 toc_sticky: false
