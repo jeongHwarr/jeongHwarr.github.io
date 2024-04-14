@@ -197,7 +197,8 @@ Temporal Layer는 연속된 이미지 프레인 간의 부드러운 전환을 �
 ### 4.2 Qualitative Results
 
 
-![4](/assets/img/2024-04-14-[논문리뷰]-Animate-Anyone:--Consistent-and-Controllable-Image-to-Video-Synthesis-for-Character-Animation.md/4.png)_맨 왼쪽 이미지: 레퍼런스 이미지 _
+![4](/assets/img/2024-04-14-[논문리뷰]-Animate-Anyone:--Consistent-and-Controllable-Image-to-Video-Synthesis-for-Character-Animation.md/4.png)
+_맨 왼쪽 이미지: 레퍼런스 이미지 _
 
 
 전신이 나오는 캐릭터, 절반 길이의 초상화, 카툰 캐릭터, 인간형 캐릭터에 대해서 애니메이션을 생성하게 되었고,  결과 레퍼런스 이미지와 유사한 시간적 일관성(temporal consistency)을 보이는 사실적인 결과가 생성되었다고 합니다.  
@@ -264,4 +265,4 @@ CLIP 이미지 인코더만 사용했을 때, ControlNet만 사용했을 때, CL
 
 - 손의 안정적인 움직임을 보이는 것에 어려움을 보였다고 합니다. 왜곡과 모션 블러등이 발생했다고 합니다.
 - 제공하는 이미지는 한 측면만 보이기 때문에 보이지 않은 부분에 대해서는 불안정한 문제가 있습니다.
-- DDPM을 활용했기 때문에 디퓨전이 아닌 모델 대비 낮은 운영 효율성이 있습니다.
+- DDPM을 활용했기 때문에 디퓨전이 아닌 모델 대비 운영 효율성이 낮습니다. 
