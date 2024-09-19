@@ -9,6 +9,9 @@ tags:
   - Text-to-Video
   - Google Research
   - Generative Models
+  - Generative AI
+  - Video Generation
+  - Diffusion
 toc: true
 toc_sticky: false
 math: true

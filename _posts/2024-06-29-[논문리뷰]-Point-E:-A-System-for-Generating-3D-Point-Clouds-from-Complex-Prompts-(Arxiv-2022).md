@@ -2,7 +2,7 @@
 layout: post
 date: 2024-06-29
 title: "[논문리뷰] Point-E: A System for Generating 3D Point Clouds from Complex Prompts (Arxiv 2022)"
-tags: [Point E, Generative AI, 3D generation, 3D point cloud generation, text-to-3D, ]
+tags: [Point E, Generative AI, 3D Generation, 3D Point Cloud Generation, Text-to-3D, Diffusion]
 categories: [Review, ]
 toc: true
 toc_sticky: false

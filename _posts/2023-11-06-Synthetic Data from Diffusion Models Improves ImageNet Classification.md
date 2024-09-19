@@ -5,6 +5,7 @@ categories: Review
 date: 2023-11-06 20:11:45 +0900
 tags:
   - Diffusion Models
+  - Diffusion
   - Data Augmentation
   - Imagen
   - Synthetic Data from Diffusion Models
