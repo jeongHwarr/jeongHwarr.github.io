@@ -1,9 +1,12 @@
 ---
 layout: post
 date: 2024-07-25
-title: "[논문리뷰] LayoutGPT"
+title: "[논문리뷰] LayoutGPT: Compositional Visual Planning and Generation with Large Language Models (NeurIPS 2023)"
 tags: [text-to-3D, Large Language Model, Pinhole Camera Model, LayoutGPT, text-to-image, Generative AI, ]
 categories: [Review, ]
+toc: true
+toc_sticky: false
+math: true
 ---
 
 
@@ -31,12 +34,7 @@ LayoutGPT의 전체 프로세스에 대한 그림은 아래와 같습니다. 여
 LayoutGPT의 핵심은 주어진 조건(C)에서 다수의 객체 튜플로 구성된 레이아웃 집합(𝒪)을 생성하는 것입니다. 
 
 
-$$
-\cal{O}=\{{\mathbf{o}_j|j=1,2,...,n}\}
-$$
-
-
-여기서 $\mathbf{o}_j$는 j번째 물체의 2D나 3D 바운딩박스 정보 를 의미합니다. 객체는 2D 혹은 3D 바운딩 박스로 표현되며, 이미지 생성과 3D 장면 생성에서 각각 다른 속성을 가집니다. 이미지 플래닝에서는 C는 텍스트 프롬프트가 되고, $\mathbf{o}_j$는 카테고리 $c_j$, 바운딩 박스의 위치인 $\mathbf{t}_j$, 바운딩 박스의 사이즈인 $\mathbf{s}_j$로 구성되고, ($\mathbf{o}_j=(c_j, \mathbf{t}_j, \mathbf{s}_j)$) 3D 장면 생성에서는 C는 룸 타입과 룸 사이즈가 되고,  $\mathbf{o}_j$는 카테고리 $c_j$, 위치 $\mathbf{t}_j$, 사이즈 $\mathbf{s}_j$, orientation인  $r_j$로 구성됩니다. ($\mathbf{o}_j=(c_j, \mathbf{t}_j, \mathbf{s}_j, \mathbf{r}_j)$).
+여기서 객체는 2D 혹은 3D 바운딩 박스로 표현되며, 이미지 생성과 3D 장면 생성에서 각각 다른 속성을 가집니다. 이미지 플래닝에서는 C는 텍스트 프롬프트가 되고, $\mathbf{o}_j$는 카테고리 $c_j$, 바운딩 박스의 위치인 $\mathbf{t}_j$, 바운딩 박스의 사이즈인 $\mathbf{s}_j$로 구성되고, ($\mathbf{o}_j=(c_j, \mathbf{t}_j, \mathbf{s}_j)$) 3D 장면 생성에서는 C는 룸 타입과 룸 사이즈가 되고,  $\mathbf{o}_j$는 카테고리 $c_j$, 위치 $\mathbf{t}_j$, 사이즈 $\mathbf{s}_j$, orientation인  $r_j$로 구성됩니다. ($\mathbf{o}_j=(c_j, \mathbf{t}_j, \mathbf{s}_j, \mathbf{r}_j)$).
 
 
 ## LayoutGPT Prompt Construction
