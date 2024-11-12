@@ -1,9 +1,12 @@
 ---
 layout: post
 date: 2024-07-25
-title: "[논문리뷰] LayoutGPT"
+title: "[논문리뷰] LayoutGPT: Compositional Visual Planning and Generation with Large Language Models (NeurIPS 2023)"
 tags: [text-to-3D, Large Language Model, Pinhole Camera Model, LayoutGPT, text-to-image, Generative AI, ]
 categories: [Review, ]
+toc: true
+toc_sticky: false
+math: true
 ---
 
 
