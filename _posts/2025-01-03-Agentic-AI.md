@@ -1,9 +1,12 @@
 ---
 layout: post
 date: 2025-01-03
-title: "Agentic AI란? "
+title: "[AgenticAI/개념] Agentic AI란? "
 tags: [Agentic AI, Agent, AI Agent, ]
 categories: [기타, ]
+toc: true
+toc_sticky: false
+math: true
 ---
 
 
@@ -16,7 +19,7 @@ categories: [기타, ]
 Agentic AI를 이해하기 전에 AI 어플리케이션의 발전 과정을 간단히 살펴보겠습니다. 아래 그림은 AI 어플리케이션의 발전 단계를 나타냅니다.
 
 
-![0](/assets/img/2025-01-03-Agentic-AI란?-.md/0.png)
+![0](/assets/img/2025-01-03-Agentic-AI.md/0.png)
 
 
 가장 기본적인 프로세스 자동화 방법은 프로세스 워크플로와 데이터를 결합하여 반복적인 작업을 위한 자동화 스크립트를 만드는 것이었습니다. 이에 더 발전한 형태로는 모델이 레이블이 된 데이터 세트에서 학습하여 예측 및 분류를 수행하는 supervised AI 기술이 있습니다. 세 번째 단계인 생성형 AI는 대규모 언어 모델을 도입하여 새로운 컨텐츠를 생성하는 것을 가능하게 하였습니다. 이제 마지막으로 소개드릴 단계가 바로 이번에 소개 드릴 agentic AI입니다. 
@@ -67,7 +70,7 @@ Agentic AI는 아래 4단계 프로세스를 통해 문제를 해결합니다. �
 ## 적용 사례
 
 
-![1](/assets/img/2025-01-03-Agentic-AI란?-.md/1.png)_출처: https://github.com/ashishpatel26/500-AI-Agents-Projects _
+![1](/assets/img/2025-01-03-Agentic-AI.md/1.png) _출처: https://github.com/ashishpatel26/500-AI-Agents-Projects _
 
 
 Agentic AI는 다양한 산업에 적용 가능하며, 그 가능성은 무궁무진합니다. 아래는 주요 사용 사례와 적용 가능한 산업 분야입니다. 
