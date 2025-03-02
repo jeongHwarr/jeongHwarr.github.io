@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2025-05-14
+date: 2024-05-14
 title: "[논문리뷰] DiffuScene: Denoising Diffusion Models for Generative Indoor Scene Synthesis"
 tags: [Generative AI, Diffusion, 3D generation, Scene Generation, ]
 categories: [Review, ]
@@ -65,11 +65,11 @@ DiffuScene은 **3D 실내 장면의 객체 속성 분포를 학습하는 Diffusi
 
 ![0](/assets/img/2025-05-14-[논문리뷰]-DiffuScene:-Denoising-Diffusion-Models-for-Generative-Indoor-Scene-Synthesis.md/0.png)
 
-1. 클래스 카테고리 $\mathrm{c}\in\reals^C$ → 예: 소파, 책상, 의자 등
-2. 객체 크기 $\mathrm{s}\in\reals^3$
-3. 위치 $l\in\reals^3$
-4. 수직 축 주위의 회전 각도 $\theta\in\reals$ → 회전 각도는 코사인 및 사인값의 2차원 벡터로 파라미터화하여 표현
-5. Shape code $\mathrm{f}\in\reals^F$ → 사전 학습된 Shape Autoencoder에서 추출
+1. 클래스 카테고리 $\mathrm{c} \in \mathbb{R}^C$ → 예: 소파, 책상, 의자 등
+2. 객체 크기 $\mathrm{s} \in \mathbb{R}^3$
+3. 위치 $\mathbf{l} \in \mathbb{R}^3$
+4. 수직 축 주위의 회전 각도 $\theta \in \mathbb{R}$ → 회전 각도는 코사인 및 사인값의 2차원 벡터로 파라미터화하여 표현
+5. Shape code $\mathrm{f} \in \mathbb{R}^F$ → 사전 학습된 Shape Autoencoder에서 추출
 
 이 속성들을 모두 연결하면 객체 하나를 다음과 같이 표현할 수 있습니다:
 
@@ -106,18 +106,21 @@ DiffuScene은 객체 배치를 학습하기 위해 **두 가지 손실 함수**�
 1. $L_{sec}$**: Scene Consistency Loss**
 	- 생성된 객체들이 원래 데이터 분포와 유사하도록 하는 손실 함수
 
-	$$
-	\begin{array}{l}{{{\cal L}_{\mathrm{sce}}:=\mathbb{E}_{\mathrm{x_o},\epsilon,t}[||\epsilon-\epsilon_{\phi}({\mathbf{x}}_{t},t)]|^{2}]}}\\ {{\vdots=\mathbb{E}_{\phi}[|\epsilon-\epsilon_{\phi}({\sqrt{\bar{\alpha}}}_{t}{\mathbf{x}}_{0}+{\sqrt{1-\bar{\alpha}}}_{t}\epsilon,t)]|^{2}]}}\end{array}
-	$$
+		$$
+		\begin{array}{l}
+		\mathcal{L}_{\mathrm{sce}} := \mathbb{E}_{\mathrm{x_o}, \epsilon, t} \left[ \left| \epsilon - \epsilon_{\phi}({\mathbf{x}}_t, t) \right|^2 \right] \\
+		= \mathbb{E}_{\phi} \left[ \left| \epsilon - \epsilon_{\phi} \left( \sqrt{\bar{\alpha}}_t \mathbf{x}_0 + \sqrt{1-\bar{\alpha}}_t \epsilon, t \right) \right|^2 \right]
+		\end{array}
+		$$
 
 2. $L_{iou}$: **Intersection-over-Union Loss**
 	- 객체 간의 intersection을 이용해서 중첩을 최소화하는 Regularization Loss
 
 		$$
-		{\cal L}_{\mathrm{iou}}:=\sum_{t=1}^{T}0.1*\overline{{{\alpha}}}_{t}*\sum_{\mathrm{o}_{i},\mathrm{o}_{j}\in\tilde{{{\bf x}}}_{0}^{t}}\mathrm{Io}\mathrm{U(o}_{i},\mathrm{o}_{j})
+		\mathcal{L}_{\mathrm{iou}} := \sum_{t=1}^{T} 0.1 \cdot \overline{\alpha}_t \cdot \sum_{\mathrm{o}_i, \mathrm{o}_j \in \tilde{\mathbf{x}}_0^t} \mathrm{IoU}(\mathrm{o}_i, \mathrm{o}_j)
 		$$
 
-		- $\tilde{{{\bf {x}}}_{0}^{t}}$: 예측된 클린 scene
+		- $\tilde{\mathbf{x}}_0^t$: 예측된 클린 scene
 
 이러한 손실 함수를 함께 사용하면, 더 현실적이고 자연스러운 3D 장면을 생성할 수 있습니다.
 
