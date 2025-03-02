@@ -10,7 +10,9 @@ math: true
 ---
 
 
-안녕하세요! 오늘은 CVPR 2024에 발표된 3D 실내 장면을 생성하는 AI 모델인 [**DiffuScene**](https://tangjiapeng.github.io/projects/DiffuScene/)에 대해 이야기해보려고 합니다. 이 모델은 Denoising Diffusion Models 활용하여 실내 공간을 자동으로 디자인하는데, 객체의 위치, 크기, 방향, 의미, 기하학적 특징 등을 조합해 더 현실적이고 자연스러운 장면을 만들어 내는 모델 입니다. 간단하게 핵심 개념을 먼저 말씀 드리면, **장면을 여러 객체들의 집합으로 구성하고, 각 객체를 속성들로 나타내서, 그 속성들의 feature들을 디퓨전 모델에 넣어서 3D 장면을 생성하는 것입니다!** 
+안녕하세요! 오늘은 CVPR 2024에 발표된 3D 실내 장면을 생성하는 AI 모델인 [**DiffuScene**](https://tangjiapeng.github.io/projects/DiffuScene/)에 대해 이야기해보려고 합니다. 이 모델은 Denoising Diffusion Models 활용하여 실내 공간을 자동으로 디자인하는데, 객체의 위치, 크기, 방향, 의미, 기하학적 특징 등을 조합해 더 현실적이고 자연스러운 장면을 만들어 내는 모델 입니다. 간단하게 핵심 개념을 먼저 말씀 드리면, **장면을 여러 객체들의 집합으로 구성하고, 각 객체를 속성들로 나타내서, 그 속성들의 feature들을 디퓨전 모델에 넣어서 3D 장면을 생성하는 것입니다!** 이를 통해 장면 생성 뿐 아니라 아래의 다양한 응용이 가능합니다!
+
+![3](/assets/img/2025-05-14-[논문리뷰]-DiffuScene:-Denoising-Diffusion-Models-for-Generative-Indoor-Scene-Synthesis.md/3.png)
 
 
 ## **DiffuScene이란?**
@@ -254,7 +256,7 @@ DiffuScene의 성능을 검증하기 위해 다양한 실험을 진행했습니�
 ![9](/assets/img/2025-05-14-[논문리뷰]-DiffuScene:-Denoising-Diffusion-Models-for-Generative-Indoor-Scene-Synthesis.md/9.png)
 
 
-![10](/assets/img/2025-05-14-[논문리뷰]-DiffuScene:-Denoising-Diffusion-Models-for-Generative-Indoor-Scene-Synthesis.md/10.png)_더 다양한 장면을 만들 수 있음 _
+![10](/assets/img/2025-05-14-[논문리뷰]-DiffuScene:-Denoising-Diffusion-Models-for-Generative-Indoor-Scene-Synthesis.md/10.png)_더 다양한 장면을 만들 수 있음_
 
 - **Scene Re-arrangement**: 기존 모델과 비교했을 때 더 직관적이고 합리적인 가구 배치를 생성할 수 있습니다.
 
