@@ -4,6 +4,9 @@ date: 2025-05-14
 title: "[논문리뷰] DiffuScene: Denoising Diffusion Models for Generative Indoor Scene Synthesis"
 tags: [Generative AI, Diffusion, 3D generation, Scene Generation, ]
 categories: [Review, ]
+toc: true
+toc_sticky: false
+math: true
 ---
 
 
