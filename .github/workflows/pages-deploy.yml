@@ -85,6 +85,10 @@ jobs:
         run: |
           bundle exec htmlproofer _site --disable-external --check-html
 
+      - name: Rename folders to remove ':'
+        run: |
+          find . -type d -name "*:*" -exec rename 's/:/_/g' {} +
+
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
