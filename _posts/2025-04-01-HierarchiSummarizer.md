@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2025-04-01
-title: "______________________HierarchiSummarizer_____"
+title: "문서의 모든 구조를 유지하며 요약하기! HierarchiSummarizer 개발기"
 tags: [Large Language Model, 자동화툴, 문서 자동 요약, 문서 자동 번역, exaon3.5, openai, ollama, Groq, Mistral, ]
 categories: [기타, ]
 toc: true
@@ -9,7 +9,7 @@ toc_sticky: false
 math: true
 ---
 
-![0](/assets/img/2025-04-01-______________________HierarchiSummarizer_____.md/0.png)
+![0](/assets/img/2025-04-01-HierarchiSummarizer.md/0.png)
 
 
 안녕하세요. 오늘은 제가 개발한 [HierarchiSummarizer](https://github.com/jeongHwarr/HierarchiSummarizer)를 소개드리려고 합니다! 사실 이건 제가 사용하려고 개발한 거긴 합니다.. 정말 필요해서 개발했어요. 매일매일 쏟아지는 논문의 핵심 내용을 빨리.. 하지만 자세히.. 읽고 싶어서 개발했습니다. 기존 요약 툴도 찾아봤지만 지나치게 요약을 많이 해서 불편했어요. 또, 원래 논문을 읽을 때도 목록식으로 정리하면서 읽곤 하는데, 이렇게 정리하는 과정이 번거로워서 LLM을 활용해 자동화했습니다.
