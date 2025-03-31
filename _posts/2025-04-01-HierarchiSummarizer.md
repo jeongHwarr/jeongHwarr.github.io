@@ -67,7 +67,7 @@ Mistral, OpenAI, Groq, Ollama 등 여러 LLM(대형 언어 모델)과 연동할 
 
 
 {% raw %}
-```text
+```bash
 git clone https://github.com/jeongHwarr/HierarchiSummarizer.git
 cd HierarchiSummarizer
 pip install -r requirements.txt
@@ -82,7 +82,7 @@ PDF를 Markdown으로 변환할 때 Mistral OCR 모델을 사용했기 때문에
 
 
 {% raw %}
-```text
+```yaml
 mistral:
   model: open-mistral-nemo
   api_key: your_api_key  # 필수 입력
@@ -107,7 +107,7 @@ Mistral API key는 무료로 발급 받을 수 있으며, 아래 과정을 통�
 
 
 {% raw %}
-```text
+```bash
 python run.py
 ```
 {% endraw %}
@@ -142,7 +142,7 @@ language: 한국어
 
 
 {% raw %}
-```javascript
+```yaml
 additional_requirements: |
 요약 문장의 끝에는 마침표를 사용하지 말아줘 
 ```
@@ -159,7 +159,7 @@ additional_requirements: |
 
 
 {% raw %}
-```javascript
+```yaml
 exclude_section:
   - reference
   - references
@@ -178,7 +178,7 @@ exclude_level:
 
 
 {% raw %}
-```javascript
+```yaml
 summary_style: hierarchical bullet list
 ```
 {% endraw %}
@@ -188,7 +188,7 @@ summary_style: hierarchical bullet list
 
 
 {% raw %}
-```javascript
+```yaml
 summary_level: detailed # detailed, medium, concise
 ```
 {% endraw %}
