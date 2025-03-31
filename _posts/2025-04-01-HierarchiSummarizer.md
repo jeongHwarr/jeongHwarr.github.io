@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2025-04-01
-title: "문서의 모든 구조를 유지하며 요약하기! HierarchiSummarizer 개발기"
+title: "문서의 모든 구조를 유지하며 번역 및 요약하기! HierarchiSummarizer 개발기"
 tags: [Large Language Model, 자동화툴, 문서 자동 요약, 문서 자동 번역, exaon3.5, openai, ollama, Groq, Mistral, ]
 categories: [기타, ]
 toc: true
@@ -12,7 +12,7 @@ math: true
 ![0](/assets/img/2025-04-01-HierarchiSummarizer.md/0.png)
 
 
-안녕하세요. 오늘은 제가 개발한 [HierarchiSummarizer](https://github.com/jeongHwarr/HierarchiSummarizer)를 소개드리려고 합니다! 사실 이건 제가 사용하려고 개발한 거긴 합니다.. 정말 필요해서 개발했어요. 매일매일 쏟아지는 논문의 핵심 내용을 빨리.. 하지만 자세히.. 읽고 싶어서 개발했습니다. 기존 요약 툴도 찾아봤지만 지나치게 요약을 많이 해서 불편했어요. 또, 원래 논문을 읽을 때도 목록식으로 정리하면서 읽곤 하는데, 이렇게 정리하는 과정이 번거로워서 LLM을 활용해 자동화했습니다.
+안녕하세요. 오늘은 제가 개발한 [HierarchiSummarizer](https://github.com/jeongHwarr/HierarchiSummarizer)를 소개드리려고 합니다! 사실 이건 제가 사용하려고 개발한 거긴 합니다.. 정말 필요해서 개발했어요. 매일매일 쏟아지는 논문의 핵심 내용을 빨리.. 하지만 자세히.. 읽고 싶어서 개발했습니다. 기존 요약 툴도 찾아봤지만 지나치게 요약을 많이 해서 불편했어요. 또, 원래 논문을 읽을 때도 목록식으로 정리하면서 읽곤 하는데 이렇게 정리하는 과정이 번거로워서 LLM을 활용해 자동화했습니다.
 
 
 ## 개발하게 된 계기
@@ -94,8 +94,8 @@ Mistral API key는 무료로 발급 받을 수 있으며, 아래 과정을 통�
 
 1. [Mistral AI website](https://docs.mistral.ai/getting-started/) 방문하기
 2. 회원가입 혹은 로그인
-3. [https://console.mistral.ai/api-keys](https://console.mistral.ai/api-keys) 해당 페이지에서 Create new key 클릭하기!
-4. 발급 받은 API 키를 config.yaml에 있는 mistral에 api_key에 입력하기!
+3. [https://console.mistral.ai/api-keys](https://console.mistral.ai/api-keys) 해당 페이지에서 `Create new key` 클릭하기!
+4. 발급 받은 API 키를 `config.yaml`에 있는 mistral에 `api_key`에 입력하기!
 
 ### 3. 요약할 파일 준비하기
 
