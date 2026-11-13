@@ -19,3 +19,6 @@ package-lock.json
 
 # Misc
 #assets/js/dist
+
+# 시안 파일 (superpowers brainstorming)
+.superpowers/
