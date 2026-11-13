@@ -1,0 +1,19 @@
+{%- assign gm_total = 16 -%}
+{%- assign gm_posts = site.posts | where_exp: "p", "p.genai_no" -%}
+<div class="gm-nav" data-toc-skip>
+  <div class="gm-nav-title">이미지 생성 모델 시리즈</div>
+  <ol>
+  {%- for i in (1..gm_total) -%}
+    {%- assign hit = gm_posts | where: "genai_no", i | first -%}
+    <li{% if page.genai_no == i %} class="gm-here"{% endif %}>
+      <span class="gm-no">{{ i }}</span>
+      {%- if hit -%}
+        {%- assign short = hit.title | split: '] ' | last -%}
+        {%- if page.genai_no == i -%}<span>{{ short }}</span>{%- else -%}<a href="{{ hit.url | relative_url }}">{{ short }}</a>{%- endif -%}
+      {%- else -%}
+        <span class="gm-soon">준비 중</span>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+  </ol>
+</div>

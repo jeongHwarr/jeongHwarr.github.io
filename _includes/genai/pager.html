@@ -1,0 +1,12 @@
+{%- assign gm_posts = site.posts | where_exp: "p", "p.genai_no" | sort: "genai_no" -%}
+{%- assign gm_prev = nil -%}{%- assign gm_next = nil -%}
+{%- for p in gm_posts -%}
+  {%- if p.genai_no < page.genai_no -%}{%- assign gm_prev = p -%}{%- endif -%}
+  {%- if p.genai_no > page.genai_no and gm_next == nil -%}{%- assign gm_next = p -%}{%- endif -%}
+{%- endfor -%}
+{%- if gm_prev or gm_next -%}
+<div class="gm-pager" data-toc-skip>
+  {%- if gm_prev -%}<a class="gm-prev" href="{{ gm_prev.url | relative_url }}">← {{ gm_prev.genai_no }}편 {{ gm_prev.title | split: '] ' | last }}</a>{%- endif -%}
+  {%- if gm_next -%}<a class="gm-next" href="{{ gm_next.url | relative_url }}">{{ gm_next.genai_no }}편 {{ gm_next.title | split: '] ' | last }} →</a>{%- endif -%}
+</div>
+{%- endif -%}
