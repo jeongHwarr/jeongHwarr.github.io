@@ -1,0 +1,38 @@
+<figure class="gm-fig" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 250" role="img" aria-label="VAE가 이미지를 압축하고 z를 뽑아 다시 이미지로 만드는 네 단계">
+    <defs><marker id="gm-00-vae-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker></defs>
+    <g class="gm-step" data-step="1">
+      <rect x="12" y="84" width="80" height="80" rx="9" fill="#9EC9F5"/><rect x="12" y="128" width="80" height="22" fill="#4FA36B"/><rect x="12" y="150" width="80" height="14" fill="#8A5A3C"/><circle cx="34" cy="104" r="9" fill="#FFD25A"/>
+      <text x="52" y="196" text-anchor="middle" font-size="20" class="gm-text-ink">입력</text>
+      <path d="M96,124 L114,124" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-00-vae-arrow)"/>
+      <polygon points="120,50 252,94 252,154 120,198" class="gm-tint-blue"/>
+      <text x="186" y="131" text-anchor="middle" font-size="22" class="gm-text-blue">인코더</text>
+    </g>
+    <g class="gm-step" data-step="2">
+      <path d="M254,104 L286,58" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-00-vae-arrow)"/>
+      <rect x="290" y="22" width="46" height="32" rx="8" class="gm-fill-blue"/><text x="313" y="45" text-anchor="middle" font-size="20" class="gm-text-onfill">μ</text>
+      <rect x="346" y="22" width="46" height="32" rx="8" class="gm-fill-blue"/><text x="369" y="45" text-anchor="middle" font-size="20" class="gm-text-onfill">σ</text>
+    </g>
+    <g class="gm-step" data-step="3">
+      <path d="M341,58 L341,90" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-00-vae-arrow)"/>
+      <ellipse cx="341" cy="124" rx="44" ry="30" class="gm-tint-key"/>
+      <g class="gm-jitter"><circle cx="341" cy="124" r="24" class="gm-fill-key"/><text x="341" y="131" text-anchor="middle" font-size="20" class="gm-text-onfill">z</text></g>
+      <text x="341" y="186" text-anchor="middle" font-size="20" class="gm-text-key">z 샘플링</text>
+    </g>
+    <g class="gm-step" data-step="4">
+      <path d="M368,124 L424,124" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-00-vae-arrow)"/>
+      <polygon points="430,94 562,50 562,198 430,154" class="gm-tint-blue"/>
+      <text x="496" y="131" text-anchor="middle" font-size="22" class="gm-text-blue">디코더</text>
+      <path d="M566,124 L584,124" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-00-vae-arrow)"/>
+      <g class="gm-swap-a"><rect x="590" y="84" width="80" height="80" rx="9" fill="#9EC9F5"/><rect x="590" y="128" width="80" height="22" fill="#4FA36B"/><rect x="590" y="150" width="80" height="14" fill="#8A5A3C"/><circle cx="648" cy="102" r="9" fill="#FFD25A"/></g>
+      <g class="gm-swap-b"><rect x="590" y="84" width="80" height="80" rx="9" fill="#F6B49A"/><rect x="590" y="126" width="80" height="22" fill="#C9653F"/><rect x="590" y="148" width="80" height="16" fill="#34405C"/><circle cx="652" cy="108" r="9" fill="#FFE08A"/></g>
+      <text x="630" y="196" text-anchor="middle" font-size="20" class="gm-text-ink">생성</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 28×28 이미지(784차원)를 인코더에 넣습니다. 인코더를 지나며 차원이 줄어듭니다.</li>
+    <li>② 인코더는 잠재 변수 z를 직접 내지 않고, z가 따를 정규분포의 평균 μ와 표준편차 σ를 냅니다.</li>
+    <li>③ N(μ, σ²)에서 z를 하나 뽑습니다. 같은 이미지를 넣어도 뽑을 때마다 z가 조금씩 다릅니다.</li>
+    <li>④ 디코더가 z로부터 784차원 이미지를 다시 만듭니다. 학습 때 쓰지 않은 z를 넣어도 이미지가 나오므로 새 이미지를 생성할 수 있습니다.</li>
+  </ol>
+</figure>
