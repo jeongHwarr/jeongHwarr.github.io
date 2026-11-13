@@ -1,0 +1,34 @@
+<figure class="gm-fig">
+  <svg class="gm-svg" viewBox="0 0 720 290" role="img" aria-label="판별 모델은 숫자 이미지를 보고 레이블 7을 내고, 생성 모델은 배운 분포에서 새 숫자 이미지를 뽑는 그림">
+    <defs><marker id="gm-01-two-models-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker></defs>
+    <!-- 판별 모델 -->
+    <text x="175" y="34" text-anchor="middle" font-size="22" class="gm-text-ink">판별 모델</text>
+    <rect x="20" y="78" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
+    <path d="M42,102 L88,102 L60,154" fill="none" class="gm-stroke-ink" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M114,123 L136,123" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-two-models-arrow)"/>
+    <rect x="142" y="93" width="92" height="60" rx="10" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+    <text x="188" y="130" text-anchor="middle" font-size="20" class="gm-text-ink">모델</text>
+    <path d="M238,123 L260,123" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-two-models-arrow)"/>
+    <rect x="266" y="100" width="62" height="46" rx="10" class="gm-fill-key"/>
+    <text x="297" y="132" text-anchor="middle" font-size="26" class="gm-text-onfill">7</text>
+    <text x="175" y="214" text-anchor="middle" font-size="22" class="gm-text-ink">p(y | x)</text>
+    <text x="175" y="252" text-anchor="middle" font-size="20" class="gm-text-mute">입력을 보고 레이블을 고름</text>
+    <!-- 구분선 -->
+    <line x1="360" y1="20" x2="360" y2="270" class="gm-stroke-mute" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <!-- 생성 모델 -->
+    <text x="545" y="34" text-anchor="middle" font-size="22" class="gm-text-ink">생성 모델</text>
+    <ellipse cx="455" cy="123" rx="70" ry="48" class="gm-fill-mute gm-stroke-mute" fill-opacity="0.1" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <ellipse cx="455" cy="123" rx="38" ry="26" class="gm-fill-mute gm-stroke-mute" fill-opacity="0.12" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <g class="gm-fill-mute">
+      <circle cx="420" cy="110" r="4"/><circle cx="440" cy="98" r="4"/><circle cx="468" cy="104" r="4"/><circle cx="490" cy="120" r="4"/>
+      <circle cx="430" cy="138" r="4"/><circle cx="458" cy="146" r="4"/><circle cx="482" cy="140" r="4"/><circle cx="447" cy="122" r="4"/>
+    </g>
+    <circle cx="470" cy="124" r="8" class="gm-fill-key"/>
+    <path d="M480,124 L586,124" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-01-two-models-arrow)"/>
+    <rect x="594" y="78" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
+    <path d="M616,102 Q640,96 664,100 L634,154 M624,128 L652,128" fill="none" class="gm-stroke-ink" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="455" y="214" text-anchor="middle" font-size="22" class="gm-text-ink">p(x)</text>
+    <text x="545" y="252" text-anchor="middle" font-size="20" class="gm-text-mute">분포에서 새 이미지를 뽑음</text>
+  </svg>
+  <p class="gm-figcap">판별 모델은 입력 이미지에 맞는 레이블을 고르고, 생성 모델은 배운 분포에서 새 이미지를 뽑습니다.</p>
+</figure>

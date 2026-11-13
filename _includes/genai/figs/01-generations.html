@@ -1,0 +1,51 @@
+<figure class="gm-fig" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 300" role="img" aria-label="VAE, GAN, Diffusion, DiT와 Flow Matching이 연도순으로 나오고 각 세대의 한계가 다음 세대로 이어지는 네 단계">
+    <defs><marker id="gm-01-generations-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-key"/></marker></defs>
+    <line x1="20" y1="40" x2="700" y2="40" class="gm-stroke-mute" stroke-width="2"/>
+    <g class="gm-step" data-step="1">
+      <circle cx="95" cy="40" r="5" class="gm-fill-mute"/><text x="95" y="28" text-anchor="middle" font-size="20" class="gm-text-mute">2013</text>
+      <rect x="15" y="60" width="160" height="150" rx="12" class="gm-tint-blue gm-stroke-blue" stroke-width="2"/>
+      <text x="95" y="100" text-anchor="middle" font-size="24" class="gm-text-blue">VAE</text>
+      <text x="95" y="145" text-anchor="middle" font-size="20" class="gm-text-ink">잠재 공간</text>
+      <text x="95" y="175" text-anchor="middle" font-size="20" class="gm-text-ink">샘플링</text>
+      <rect x="25" y="228" width="140" height="36" rx="18" class="gm-fill-key"/>
+      <text x="95" y="253" text-anchor="middle" font-size="20" class="gm-text-onfill">흐릿함</text>
+    </g>
+    <g class="gm-step" data-step="2">
+      <path d="M165,246 C182,246 178,150 192,150" fill="none" class="gm-stroke-key" stroke-width="2.5" marker-end="url(#gm-01-generations-arrow)"/>
+      <circle cx="275" cy="40" r="5" class="gm-fill-mute"/><text x="275" y="28" text-anchor="middle" font-size="20" class="gm-text-mute">2014</text>
+      <rect x="195" y="60" width="160" height="150" rx="12" class="gm-tint-cyan gm-stroke-cyan" stroke-width="2"/>
+      <text x="275" y="100" text-anchor="middle" font-size="24" class="gm-text-cyan">GAN</text>
+      <text x="275" y="145" text-anchor="middle" font-size="20" class="gm-text-ink">경쟁 학습</text>
+      <text x="275" y="175" text-anchor="middle" font-size="20" class="gm-text-ink">선명한 결과</text>
+      <rect x="205" y="228" width="140" height="36" rx="18" class="gm-fill-key"/>
+      <text x="275" y="253" text-anchor="middle" font-size="20" class="gm-text-onfill">학습 불안정</text>
+    </g>
+    <g class="gm-step" data-step="3">
+      <path d="M345,246 C362,246 358,150 372,150" fill="none" class="gm-stroke-key" stroke-width="2.5" marker-end="url(#gm-01-generations-arrow)"/>
+      <circle cx="455" cy="40" r="5" class="gm-fill-mute"/><text x="455" y="28" text-anchor="middle" font-size="20" class="gm-text-mute">2020</text>
+      <rect x="375" y="60" width="160" height="150" rx="12" class="gm-tint-violet gm-stroke-violet" stroke-width="2"/>
+      <text x="455" y="100" text-anchor="middle" font-size="24" class="gm-text-violet">Diffusion</text>
+      <text x="455" y="145" text-anchor="middle" font-size="20" class="gm-text-ink">노이즈 제거</text>
+      <text x="455" y="175" text-anchor="middle" font-size="20" class="gm-text-ink">안정, 고품질</text>
+      <rect x="385" y="228" width="140" height="36" rx="18" class="gm-fill-key"/>
+      <text x="455" y="253" text-anchor="middle" font-size="20" class="gm-text-onfill">느린 생성</text>
+    </g>
+    <g class="gm-step" data-step="4">
+      <path d="M525,246 C542,246 538,150 552,150" fill="none" class="gm-stroke-key" stroke-width="2.5" marker-end="url(#gm-01-generations-arrow)"/>
+      <circle cx="635" cy="40" r="5" class="gm-fill-mute"/><text x="635" y="28" text-anchor="middle" font-size="20" class="gm-text-mute">2022~2024</text>
+      <rect x="555" y="60" width="160" height="150" rx="12" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+      <text x="635" y="94" text-anchor="middle" font-size="22" class="gm-text-ink">DiT</text>
+      <text x="635" y="120" text-anchor="middle" font-size="20" class="gm-text-ink">Flow Matching</text>
+      <text x="635" y="158" text-anchor="middle" font-size="20" class="gm-text-ink">확장성</text>
+      <text x="635" y="186" text-anchor="middle" font-size="20" class="gm-text-ink">적은 단계</text>
+      <text x="635" y="253" text-anchor="middle" font-size="20" class="gm-text-mute">SD3, FLUX.1, Sora</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 2013년 VAE는 잠재 공간에서 뽑은 벡터로 새 이미지를 만들 수 있게 했지만, 결과가 흐릿했습니다.</li>
+    <li>② 2014년 GAN은 생성자와 판별자를 경쟁시켜 선명한 이미지를 얻었지만, 학습이 불안정했습니다.</li>
+    <li>③ 2020년 DDPM 이후 Diffusion은 안정적으로 학습하며 품질과 다양성을 함께 얻었지만, 생성 단계가 많아 느렸습니다.</li>
+    <li>④ 2022년 이후 DiT는 Transformer 구조로 확장성을, Flow Matching은 적은 단계 생성을 더했습니다. 2024년 Stable Diffusion 3와 FLUX.1은 둘을 함께 씁니다.</li>
+  </ol>
+</figure>

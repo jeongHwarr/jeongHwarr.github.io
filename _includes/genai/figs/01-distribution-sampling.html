@@ -1,0 +1,47 @@
+<figure class="gm-fig" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 340" role="img" aria-label="숫자 0, 1, 7 이미지가 특징 평면에 모이고, 분포를 배운 뒤 그 안에서 새 샘플을 뽑고, 조건 7을 주면 7 영역에서만 뽑는 네 단계">
+    <defs><marker id="gm-01-distribution-sampling-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-key"/></marker></defs>
+    <g class="gm-step" data-step="1">
+      <path d="M60,20 L60,290 L490,290" fill="none" class="gm-stroke-mute" stroke-width="2"/>
+      <text x="490" y="320" text-anchor="end" font-size="20" class="gm-text-mute">특징 1</text>
+      <text transform="translate(34,155) rotate(-90)" text-anchor="middle" font-size="20" class="gm-text-mute">특징 2</text>
+      <g font-size="20" text-anchor="middle" class="gm-text-ink">
+        <text x="130" y="87">0</text><text x="165" y="77">0</text><text x="195" y="99">0</text><text x="140" y="119">0</text><text x="178" y="125">0</text><text x="155" y="102">0</text>
+        <text x="350" y="112">1</text><text x="385" y="102">1</text><text x="410" y="127">1</text><text x="365" y="142">1</text><text x="395" y="152">1</text><text x="380" y="125">1</text>
+        <text x="220" y="217">7</text><text x="255" y="207">7</text><text x="285" y="229">7</text><text x="232" y="247">7</text><text x="268" y="257">7</text><text x="250" y="233">7</text>
+      </g>
+    </g>
+    <g class="gm-step" data-step="2">
+      <g class="gm-fill-mute gm-stroke-mute" fill-opacity="0.1" stroke-width="1.5" stroke-dasharray="5 5">
+        <ellipse cx="162" cy="96" rx="76" ry="48"/><ellipse cx="162" cy="96" rx="42" ry="27"/>
+        <ellipse cx="380" cy="124" rx="76" ry="48"/><ellipse cx="380" cy="124" rx="42" ry="27"/>
+        <ellipse cx="252" cy="230" rx="76" ry="48"/><ellipse cx="252" cy="230" rx="42" ry="27"/>
+      </g>
+    </g>
+    <g class="gm-step" data-step="3">
+      <g class="gm-jitter"><circle cx="205" cy="114" r="9" class="gm-fill-key"/></g>
+      <path d="M216,108 C330,60 450,58 544,84" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-01-distribution-sampling-arrow)"/>
+      <rect x="550" y="36" width="110" height="100" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
+      <ellipse cx="605" cy="86" rx="20" ry="30" fill="none" class="gm-stroke-ink" stroke-width="6" transform="rotate(-12 605 86)"/>
+      <text x="605" y="164" text-anchor="middle" font-size="20" class="gm-text-ink">샘플</text>
+    </g>
+    <g class="gm-step" data-step="4">
+      <g class="gm-fill-panel" fill-opacity="0.8">
+        <ellipse cx="162" cy="96" rx="84" ry="56"/><ellipse cx="380" cy="124" rx="84" ry="56"/>
+      </g>
+      <rect x="262" y="12" width="112" height="36" rx="18" class="gm-fill-key"/>
+      <text x="318" y="37" text-anchor="middle" font-size="20" class="gm-text-onfill">조건: 7</text>
+      <g class="gm-jitter"><circle cx="300" cy="240" r="9" class="gm-fill-key"/></g>
+      <path d="M311,242 C400,254 470,256 544,252" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-01-distribution-sampling-arrow)"/>
+      <rect x="550" y="196" width="110" height="100" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
+      <path d="M582,222 L630,222 L598,276" fill="none" class="gm-stroke-ink" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="605" y="324" text-anchor="middle" font-size="20" class="gm-text-ink">조건부 샘플</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 숫자 0, 1, 7 학습 이미지를 특징 두 개로 나타내면, 같은 숫자끼리 비슷한 위치에 모입니다.</li>
+    <li>② 분포 학습은 데이터가 몰린 영역을 찾는 단계입니다. 점선 안쪽으로 갈수록 그 숫자다운 이미지가 많습니다.</li>
+    <li>③ 샘플링은 분포 안에서 한 점을 무작위로 뽑아 이미지로 만드는 단계입니다. 학습 데이터에 없던 위치라 새 이미지가 나옵니다.</li>
+    <li>④ 조건으로 숫자 7을 주면 7 영역에서만 뽑습니다. 뽑을 때마다 결과는 다르지만 모두 7입니다.</li>
+  </ol>
+</figure>
