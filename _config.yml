@@ -21,7 +21,7 @@ title: JeongHwarr의 작은 다락방 # the main title
 tagline: AI researcher (Vision, Generative) # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  개인적으로 공부하고 연구한 것을 정리하고 공유하는 블로그입니다 😄
+  AI 연구 엔지니어의 기술 블로그입니다. 이미지 생성 모델(VAE, GAN, Diffusion, Flow Matching), 3D 생성, 컴퓨터 비전 논문 리뷰와 개념 정리를 씁니다.
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -45,6 +45,11 @@ social:
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/jeonghwa-yoo-8403a716b
+
+# 구조화 데이터(JSON-LD)의 작성자. jekyll-seo-tag가 모든 글에 author로 넣는다.
+author:
+  name: JeongHwarr
+  url: https://github.com/jeongHwarr
 
 # Site Verification Settings
 webmaster_verifications:
