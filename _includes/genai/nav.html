@@ -1,17 +1,21 @@
-{%- assign gm_total = 16 -%}
+{%- comment -%}
+  시리즈 목차. 16편 가제는 _data/genai_series.yml, 공개 여부는 _posts의 genai_no로 정한다.
+  공개된 편은 글 제목과 링크, 공개 전 편은 가제와 "준비 중" 표시.
+{%- endcomment -%}
 {%- assign gm_posts = site.posts | where_exp: "p", "p.genai_no" -%}
 <div class="gm-nav" data-toc-skip>
   <div class="gm-nav-title">이미지 생성 모델 시리즈</div>
   <ol>
-  {%- for i in (1..gm_total) -%}
+  {%- for ep in site.data.genai_series.episodes -%}
+    {%- assign i = ep.episode -%}
     {%- assign hit = gm_posts | where: "genai_no", i | first -%}
-    <li{% if page.genai_no == i %} class="gm-here"{% endif %}>
+    <li class="{% if page.genai_no == i %}gm-here{% endif %}{% unless hit %} gm-unpub{% endunless %}">
       <span class="gm-no">{{ i }}</span>
       {%- if hit -%}
         {%- assign short = hit.title | split: '] ' | last -%}
         {%- if page.genai_no == i -%}<span>{{ short }}</span>{%- else -%}<a href="{{ hit.url | relative_url }}">{{ short }}</a>{%- endif -%}
       {%- else -%}
-        <span class="gm-soon">준비 중</span>
+        <span>{{ ep.title }} <span class="gm-soon">준비 중</span></span>
       {%- endif -%}
     </li>
   {%- endfor -%}

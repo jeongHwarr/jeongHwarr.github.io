@@ -143,7 +143,8 @@ html[data-mode="dark"] {
 .gm-nav ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px 18px; }
 .gm-nav li { margin: 0; padding: 2px 0; display: flex; gap: 8px; align-items: baseline; }
 .gm-nav .gm-no { color: var(--gm-mute); font-weight: 700; min-width: 1.6em; text-align: right; }
-.gm-nav .gm-soon { color: var(--gm-mute); }
+.gm-nav li.gm-unpub { color: var(--gm-mute); }
+.gm-nav .gm-soon { display: inline-block; margin-left: 6px; padding: 0 7px; border: 1px solid var(--gm-line); border-radius: 9px; font-size: 0.72rem; font-weight: 600; color: var(--gm-mute); white-space: nowrap; vertical-align: 1px; }
 .gm-nav li.gm-here { font-weight: 800; color: var(--gm-key-ink); }
 .gm-nav li.gm-here .gm-no { color: var(--gm-key-ink); }
 .gm-pager { padding: 10px 16px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -152,3 +153,11 @@ html[data-mode="dark"] {
 .gm-cta p { margin: 0 0 8px; }
 .gm-cta p:last-child { margin-bottom: 0; }
 .gm-cta .gm-cta-btn { font-weight: 800; }
+
+/* 접는 토글: <details class="gm-more"><summary>…</summary> … </details> */
+details.gm-more { margin: 1.2rem 0; border: 1px solid var(--gm-line); border-radius: 10px; background: var(--gm-panel); padding: 0 14px; }
+details.gm-more > summary { cursor: pointer; padding: 10px 0; font-weight: 700; color: var(--gm-ink); list-style: none; }
+details.gm-more > summary::-webkit-details-marker { display: none; }
+details.gm-more > summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--gm-key-ink); transition: transform 0.2s; }
+details.gm-more[open] > summary::before { transform: rotate(90deg); }
+details.gm-more[open] { padding-bottom: 6px; }
