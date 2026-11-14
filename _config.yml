@@ -21,7 +21,7 @@ title: JeongHwarr의 작은 다락방 # the main title
 tagline: AI researcher (Vision, Generative) # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  개인적으로 공부하고 연구한 것을 정리하고 공유하는 블로그입니다 😄
+  AI 연구 엔지니어의 기술 블로그입니다. 이미지 생성 모델(VAE, GAN, Diffusion, Flow Matching), 3D 생성, 컴퓨터 비전 논문 리뷰와 개념 정리를 씁니다.
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -46,6 +46,11 @@ social:
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/jeonghwa-yoo-8403a716b
 
+# 구조화 데이터(JSON-LD)의 작성자. jekyll-seo-tag가 모든 글에 author로 넣는다.
+author:
+  name: JeongHwarr
+  url: https://github.com/jeongHwarr
+
 # Site Verification Settings
 webmaster_verifications:
   google: # fill in your Google verification code
@@ -54,6 +59,7 @@ webmaster_verifications:
   yandex: # fill in your Yandex verification code
   baidu: # fill in your Baidu verification code
   facebook: # fill in your Facebook verification code
+  naver: # 네이버 서치어드바이저 사이트 소유확인 메타 태그의 content 값 (_includes/metadata-hook.html이 출력)
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
@@ -94,7 +100,7 @@ avatar: "/assets/img/profile.jpg"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+social_preview_image: /assets/img/profile.jpg # 글에 image가 없을 때 공유 미리보기에 쓰는 기본 이미지
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -162,6 +168,10 @@ collections:
     sort_by: order
 
 defaults:
+  - scope:
+      path: "googlef7b14f91e639f073.html" # 구글 소유권 확인 파일은 sitemap에서 뺀다
+    values:
+      sitemap: false
   - scope:
       path: "" # An empty string here means all files in the project
       type: posts
