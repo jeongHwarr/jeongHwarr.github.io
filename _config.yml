@@ -54,6 +54,7 @@ webmaster_verifications:
   yandex: # fill in your Yandex verification code
   baidu: # fill in your Baidu verification code
   facebook: # fill in your Facebook verification code
+  naver: # 네이버 서치어드바이저 사이트 소유확인 메타 태그의 content 값 (_includes/metadata-hook.html이 출력)
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
@@ -94,7 +95,7 @@ avatar: "/assets/img/profile.jpg"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+social_preview_image: /assets/img/profile.jpg # 글에 image가 없을 때 공유 미리보기에 쓰는 기본 이미지
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -162,6 +163,10 @@ collections:
     sort_by: order
 
 defaults:
+  - scope:
+      path: "googlef7b14f91e639f073.html" # 구글 소유권 확인 파일은 sitemap에서 뺀다
+    values:
+      sitemap: false
   - scope:
       path: "" # An empty string here means all files in the project
       type: posts

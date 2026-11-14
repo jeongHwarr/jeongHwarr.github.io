@@ -1,4 +1,7 @@
 <!-- A placeholder to allow defining custom metadata -->
+{% if site.webmaster_verifications.naver %}
+  <meta name="naver-site-verification" content="{{ site.webmaster_verifications.naver }}">
+{% endif %}
 {% if page.genai %}
   {% assign gm_v = site.time | date: '%s' %}
   <link rel="stylesheet" href="{{ '/assets/genai/genai.css' | relative_url }}?v={{ gm_v }}">
