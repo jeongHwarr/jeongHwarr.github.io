@@ -80,7 +80,7 @@ genai_session: 1
 
 {% include genai/figs/01-vae-mechanism.html %}
 
-**원 논문의 결과입니다.** VAE 논문은 화질 지표 대신 학습 목표인 하한과 로그 우도를 곡선으로 보고합니다(Figure 2, 3). 아래는 손글씨 숫자(MNIST)로 학습한 모델에서 잠재 벡터를 무작위로 뽑아 만든 이미지입니다. 잠재 공간이 2차원이면 획이 크게 뭉개지고, 20차원으로 늘리면 나아지지만 여전히 번진 획이 보입니다.
+VAE 논문은 화질 지표 대신 학습 목표인 하한과 로그 우도를 곡선으로 보고합니다(Figure 2, 3). 아래는 손글씨 숫자(MNIST)로 학습한 모델에서 잠재 벡터를 무작위로 뽑아 만든 이미지입니다. 잠재 공간이 2차원이면 획이 크게 뭉개지고, 20차원으로 늘리면 나아지지만 여전히 번진 획이 보입니다.
 
 ![VAE 논문의 MNIST 무작위 샘플](/assets/img/genai/01/paper-vae-samples.png)
 _잠재 공간 차원(2, 5, 10, 20)별 MNIST 무작위 샘플. 출처: Kingma & Welling (2013), [Figure 5](https://arxiv.org/abs/1312.6114)_
@@ -94,7 +94,7 @@ _잠재 공간 차원(2, 5, 10, 20)별 MNIST 무작위 샘플. 출처: Kingma & 
 
 {% include genai/figs/01-gan-mechanism.html %}
 
-**원 논문의 결과입니다.** 첫 GAN 논문은 MNIST, TFD, CIFAR-10 같은 작은 데이터셋에서 샘플을 보여 줍니다. 아래 그림의 오른쪽 노란 테두리 열에는 바로 옆 생성 샘플과 가장 비슷한 실제 학습 이미지가 있습니다. 두 이미지를 나란히 배치해 모델이 학습 데이터를 외워서 출력하지 않았음을 보여 줍니다. FID가 나오기 전이라 이 논문은 Parzen window로 추정한 로그 우도를 보고했습니다(MNIST 225 ± 2, Table 1).
+첫 GAN 논문은 MNIST, TFD, CIFAR-10 같은 작은 데이터셋에서 샘플을 보여 줍니다. 아래 그림의 오른쪽 노란 테두리 열에는 바로 옆 생성 샘플과 가장 비슷한 실제 학습 이미지가 있습니다. 두 이미지를 나란히 배치해 모델이 학습 데이터를 외워서 출력하지 않았음을 보여 줍니다. FID가 나오기 전이라 이 논문은 Parzen window로 추정한 로그 우도를 보고했습니다(MNIST 225 ± 2, Table 1).
 
 ![GAN 논문의 생성 샘플](/assets/img/genai/01/paper-gan-samples.png)
 _선별하지 않은 생성 샘플. a) MNIST, b) TFD, c)와 d) CIFAR-10. 출처: Goodfellow et al. (2014), [Figure 2](https://arxiv.org/abs/1406.2661)_
@@ -122,7 +122,7 @@ Diffusion 모델은 이미지에 노이즈를 조금씩 더해 완전한 노이�
 
 {% include genai/figs/01-diffusion-mechanism.html %}
 
-**원 논문의 결과입니다.** DDPM은 CIFAR-10 비조건부 생성에서 FID 3.17과 IS 9.46을 보고했습니다(초록, Table 1). 같은 표에 실린 GAN 계열 결과(StyleGAN2+ADA, 3.26)보다 낮은 값입니다.
+DDPM은 CIFAR-10 비조건부 생성에서 FID 3.17과 IS 9.46을 보고했습니다(초록, Table 1). 같은 표에 실린 GAN 계열 결과(StyleGAN2+ADA, 3.26)보다 낮은 값입니다.
 
 ![DDPM 생성 샘플](/assets/img/genai/01/paper-ddpm-samples.jpg)
 _DDPM이 만든 CelebA-HQ 256×256 얼굴(왼쪽)과 CIFAR-10 샘플(오른쪽). 출처: Ho et al. (2020), [Figure 1](https://arxiv.org/abs/2006.11239)_
@@ -143,7 +143,7 @@ _LAION으로 학습한 Latent Diffusion의 텍스트-이미지 샘플(DDIM 200�
 
 2024년에 나온 Stable Diffusion 3와 FLUX.1은 두 방향을 합친 모델로, Transformer 구조를 Rectified Flow 방식으로 학습합니다. 비디오 생성 모델 Sora도 Diffusion Transformer 구조를 씁니다. DiT는 13편, Flow Matching은 14편에서 다룹니다.
 
-**원 논문의 결과입니다.** DiT-XL/2는 클래스 조건부 ImageNet 256×256에서 FID 2.27을 기록했습니다(guidance 1.5, 초록, Table 2). guidance 없이는 9.62입니다.
+DiT-XL/2는 클래스 조건부 ImageNet 256×256에서 FID 2.27을 기록했습니다(guidance 1.5, 초록, Table 2). guidance 없이는 9.62입니다.
 
 ![DiT 생성 샘플](/assets/img/genai/01/paper-dit-samples.jpg)
 _DiT-XL/2가 만든 ImageNet 512×512, 256×256 샘플(선별). 출처: Peebles & Xie (2023), [Figure 1](https://arxiv.org/abs/2212.09748), CC BY 4.0_
