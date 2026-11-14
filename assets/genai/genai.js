@@ -16,6 +16,12 @@
     return e;
   }
 
+  /* 요소가 화면보다 훨씬 크면 고정 비율에 끝내 도달하지 못하므로, 화면 높이의 60%가 보이는 정도로 기준을 낮춘다 */
+  function visibleRatio(target, base) {
+    var h = Math.max(1, target.getBoundingClientRect().height);
+    return Math.max(0.05, Math.min(base, 0.6 * window.innerHeight / h));
+  }
+
   function onceVisible(target, ratio, fn) {
     if (!('IntersectionObserver' in window)) { fn(); return; }
     var io = new IntersectionObserver(function (entries) {
@@ -59,7 +65,7 @@
     if (caps.length !== N) console.warn('[gm] 단계 수(' + N + ')와 캡션 수(' + caps.length + ')가 다릅니다', root);
     root.classList.add('gm-on', 'tex2jax_ignore');
     var ui = controls(root, N, false);
-    var cur = 0, timer = null;
+    var cur = 0, timer = null, touched = false;
 
     function show(n) {
       cur = n;
@@ -79,7 +85,7 @@
       var tick = function () { show(cur + 1); if (cur < N) timer = setTimeout(tick, FIG_STEP_MS); else stop(); };
       timer = setTimeout(tick, 300);
     }
-    function user(f) { return function (e) { if (e) e.stopPropagation(); stop(); f(); }; }
+    function user(f) { return function (e) { if (e) e.stopPropagation(); touched = true; stop(); f(); }; }
 
     ui.next.onclick = user(function () { show(Math.min(N, cur + 1)); });
     ui.prev.onclick = user(function () { show(Math.max(1, cur - 1)); });
@@ -90,7 +96,8 @@
 
     if (REDUCED) { show(N); return; }
     show(0);
-    onceVisible(root, 0.4, play);
+    /* 자동 재생 전에 사용자가 먼저 조작했으면 자동 재생하지 않는다 */
+    onceVisible(root, visibleRatio(root, 0.4), function () { if (!touched) play(); });
   }
 
   /* ───────── 수식 유도 (data-gm="deriv") ───────── */
@@ -136,7 +143,7 @@
     var fallback = el('div', 'gm-fallback');
     fallback.textContent = '수식을 불러오는 중입니다.\n' + R.map(function (r) { return texOf(r.l).concat(texOf(r.r)).join(' '); }).join('\n');
 
-    var rows = [], hideT = [], fullGuide = null, ui = null, cur = 0, auto = null, fullTimer = null;
+    var rows = [], hideT = [], fullGuide = null, ui = null, cur = 0, auto = null, fullTimer = null, touched = false;
 
     /* 항마다 따로 렌더하면 기준선이 어긋나므로, 괄호와 짧은 연산자(=, +, \ge 등)를 뺀 항에 높이 맞춤을 붙인다 */
     function math(tex) {
@@ -205,7 +212,8 @@
       if (!grid) return;
       root.classList.remove('gm-side'); root.classList.add('gm-below');
       var wEq = grid.getBoundingClientRect().width;
-      var room = scroll.clientWidth - wEq - 24;
+      /* 24 = 열 간격 10 + 여유, 14 = .gm-nc의 margin-left */
+      var room = scroll.clientWidth - wEq - 24 - 14;
       if (room >= 200) {
         root.classList.remove('gm-below'); root.classList.add('gm-side');
         root.style.setProperty('--gm-note-w', Math.min(320, Math.floor(room)) + 'px');
@@ -351,6 +359,7 @@
     function user(f) {
       return function (e) {
         if (e) e.stopPropagation();
+        touched = true;
         stopAuto(); clearTimeout(fullTimer);
         var wasFull = root.classList.contains('gm-full');
         root.classList.remove('gm-full');
@@ -374,7 +383,9 @@
       ui.all.onclick = user(enterFull);
       root.setAttribute('data-gm-ready', '1');
       if (REDUCED) { enterFull(); return; }
-      onceVisible(stage, 0.35, autoplay);
+      /* 자동 재생 전에도 첫 줄은 보여 두고, 사용자가 먼저 조작했으면 자동 재생하지 않는다 */
+      cur = 0; unhide(0); setCur(0); syncUi(0);
+      onceVisible(stage, visibleRatio(stage, 0.35), function () { if (!touched) autoplay(); });
     }
 
     waitMathJax(build, function () { stage.appendChild(fallback); });
