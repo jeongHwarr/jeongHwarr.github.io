@@ -1,6 +1,7 @@
 <figure class="gm-fig tex2jax_ignore" data-gm="steps">
-  <svg class="gm-svg" viewBox="0 0 720 300" role="img" aria-label="DiT는 이미지를 패치 토큰으로 나눠 Transformer로 처리하고, Diffusion은 노이즈에서 이미지까지 굽은 경로를 많은 단계로 가는 반면 Flow Matching은 곧은 경로를 적은 단계로 가는 비교">
-    <defs><marker id="gm-01-dit-flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker></defs>
+  <svg class="gm-svg" viewBox="0 0 720 300" role="img" aria-label="DiT는 이미지를 패치 토큰으로 나눠 Transformer로 처리하고, Flow Matching은 노이즈에서 이미지로 가는 경로의 각 지점에서 속도를 학습하며, Rectified Flow는 그 경로를 곧게 펴서 적은 단계로 생성하는 비교">
+    <defs><marker id="gm-01-dit-flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker>
+          <marker id="gm-01-dit-flow-varrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-ink"/></marker></defs>
     <line x1="355" y1="20" x2="355" y2="290" class="gm-stroke-mute" stroke-width="1.5" stroke-dasharray="6 6"/>
     <g class="gm-step" data-step="1">
       <rect x="20" y="62" width="90" height="90" rx="6" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
@@ -20,19 +21,20 @@
       <rect x="664" y="64" width="40" height="40" rx="6" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
       <path d="M674,74 L694,74 L682,96" fill="none" class="gm-stroke-ink" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
       <text x="656" y="80" text-anchor="end" font-size="20" class="gm-text-ink">이미지</text>
-      <path d="M400,232 C410,70 540,190 684,84" fill="none" class="gm-stroke-violet" stroke-width="2.5"/>
-      <g class="gm-fill-violet"><circle cx="403.9" cy="201.4" r="5"/><circle cx="411.3" cy="178.4" r="5"/><circle cx="421.9" cy="161.7" r="5"/><circle cx="435.5" cy="150.4" r="5"/><circle cx="451.8" cy="143.2" r="5"/><circle cx="470.6" cy="139.1" r="5"/><circle cx="491.8" cy="137.0" r="5"/><circle cx="514.9" cy="135.7" r="5"/><circle cx="539.9" cy="134.2" r="5"/><circle cx="566.5" cy="131.4" r="5"/><circle cx="594.4" cy="126.0" r="5"/><circle cx="623.5" cy="117.1" r="5"/><circle cx="653.4" cy="103.4" r="5"/></g>
-      <text x="548" y="292" text-anchor="middle" font-size="20" class="gm-text-violet">Diffusion: 굽은 경로, 많은 단계</text>
+      <path d="M400,232 C410,70 540,190 684,84" fill="none" class="gm-stroke-mute" stroke-width="2.5"/>
+      <g class="gm-fill-mute"><circle cx="403.9" cy="201.4" r="4"/><circle cx="411.3" cy="178.4" r="4"/><circle cx="421.9" cy="161.7" r="4"/><circle cx="435.5" cy="150.4" r="4"/><circle cx="451.8" cy="143.2" r="4"/><circle cx="470.6" cy="139.1" r="4"/><circle cx="491.8" cy="137.0" r="4"/><circle cx="514.9" cy="135.7" r="4"/><circle cx="539.9" cy="134.2" r="4"/><circle cx="566.5" cy="131.4" r="4"/><circle cx="594.4" cy="126.0" r="4"/><circle cx="623.5" cy="117.1" r="4"/><circle cx="653.4" cy="103.4" r="4"/></g>
+      <path d="M416.4,169.0 L434.9,140.4" class="gm-stroke-ink" stroke-width="3" marker-end="url(#gm-01-dit-flow-varrow)"/><path d="M468.3,139.5 L501.8,134.1" class="gm-stroke-ink" stroke-width="3" marker-end="url(#gm-01-dit-flow-varrow)"/><path d="M546.1,133.7 L580.0,130.6" class="gm-stroke-ink" stroke-width="3" marker-end="url(#gm-01-dit-flow-varrow)"/><path d="M624.6,116.6 L656.4,104.5" class="gm-stroke-ink" stroke-width="3" marker-end="url(#gm-01-dit-flow-varrow)"/>
+      <text x="540" y="292" text-anchor="middle" font-size="20" class="gm-text-ink">Flow Matching: 속도(velocity) 학습</text>
     </g>
     <g class="gm-step" data-step="3">
       <line x1="400" y1="232" x2="684" y2="84" class="gm-stroke-key" stroke-width="4"/>
       <g class="gm-fill-key"><circle cx="494.7" cy="182.7" r="8"/><circle cx="589.3" cy="133.3" r="8"/></g>
-      <text x="520" y="40" text-anchor="middle" font-size="20" class="gm-text-key">Flow Matching: 곧은 경로, 적은 단계</text>
+      <text x="540" y="40" text-anchor="middle" font-size="20" class="gm-text-key">Rectified Flow: 곧은 경로, 적은 단계</text>
     </g>
   </svg>
   <ol class="gm-caps">
     <li>① DiT는 이미지를 작은 패치로 잘라 토큰으로 만들고, U-Net 대신 Transformer로 처리합니다. 모델과 연산량을 키울수록 생성 품질이 꾸준히 좋아집니다.</li>
-    <li>② Diffusion은 노이즈에서 이미지까지 휘어진 경로를 따라갑니다. 경로가 휘어 있어서 작은 보폭으로 여러 번 나눠 가야 합니다.</li>
-    <li>③ Flow Matching과 Rectified Flow는 노이즈와 이미지를 잇는 경로가 곧아지도록 학습합니다. 경로가 곧으면 큰 보폭으로 몇 번 만에 도착할 수 있습니다.</li>
+    <li>② Flow Matching은 노이즈와 이미지 사이 경로의 각 지점에서 이미지가 움직여야 할 속도(velocity)를 신경망이 직접 학습합니다. 생성할 때는 이 속도를 따라 조금씩 이동하는데, 경로가 휘어 있으면 작은 보폭으로 여러 번 나눠 가야 합니다.</li>
+    <li>③ Rectified Flow는 노이즈와 이미지를 직선으로 잇는 경로에서 속도를 학습하고, 학습한 흐름을 다시 곧게 펴는 과정(reflow)을 거칩니다. 경로가 곧으면 큰 보폭으로 몇 번 만에 도착할 수 있습니다.</li>
   </ol>
 </figure>
