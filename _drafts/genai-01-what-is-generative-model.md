@@ -17,7 +17,7 @@ genai_session: 1
 > **이 글의 핵심**
 > - 생성 모델은 **데이터 분포를 배우고, 그 분포에서 새 이미지를 뽑는** 모델입니다.
 > - 이미지 생성 모델은 **흐릿한 결과(VAE) → 불안정한 학습(GAN) → 느린 생성(Diffusion)이라는** 한계를 차례로 넘으며 발전했습니다.
-> - 최근 모델은 **Transformer 구조(DiT)와, 노이즈에서 이미지로 가는 속도(velocity)를 직접 학습하는 Flow Matching을** 함께 씁니다.
+> - 최근 모델은 **Transformer 구조(DiT)와 Flow Matching 계열 학습 방식을** 함께 씁니다.
 {: .prompt-tip }
 
 ## 판별 모델과 생성 모델
@@ -91,18 +91,7 @@ Diffusion 모델은 노이즈에서 출발해 노이즈를 조금씩 걷어 내�
 
 ### DiT와 Flow Matching
 
-최근 모델은 구조와 학습 방식 두 방향에서 Diffusion을 발전시켰습니다.
-
-- **DiT(Diffusion Transformer):** 이미지를 작은 패치로 잘라 문장의 단어처럼 나열하고, U-Net 대신 Transformer가 패치 사이의 관계를 계산합니다. 언어 모델처럼 **모델을 키울수록 품질이 꾸준히 좋아지는 확장성**이 장점입니다.
-- **Flow Matching:** Diffusion이 단계마다 섞인 노이즈를 예측해 걷어 낸다면, Flow Matching은 **노이즈에서 이미지로 가는 속도(velocity)를 신경망이 직접 학습**합니다. 생성할 때는 학습한 속도를 따라 노이즈를 조금씩 이동시켜 이미지에 도착합니다.
-- **Rectified Flow:** 같은 시기에 나온 Rectified Flow는 노이즈와 이미지를 직선으로 잇는 경로에서 속도를 학습하고, 학습한 흐름을 다시 곧게 펴는 과정(reflow)을 거칩니다. **경로가 곧을수록 큰 보폭으로 적은 단계 만에 도착**할 수 있습니다.
-
-{% include genai/figs/01-dit-flow.html %}
-
-2024년에 나온 Stable Diffusion 3와 FLUX.1은 두 방향을 합쳐, Transformer 구조를 Rectified Flow 방식으로 학습한 모델입니다. 비디오 생성 모델 Sora도 Diffusion Transformer 구조를 씁니다. DiT는 13편, Flow Matching은 14편에서 다룹니다.
-
-![Stable Diffusion 3가 생성한 이미지](/assets/img/genai/01/paper-sd3-samples.jpg)
-_Transformer 구조와 Rectified Flow를 쓰는 Stable Diffusion 3가 생성한 이미지. 출처: Esser et al. (2024), [Figure 1](https://arxiv.org/abs/2403.03206)_
+DiT(Diffusion Transformer)는 Diffusion에서 노이즈를 예측하던 U-Net 자리에 Transformer를 넣어, **모델을 키울수록 품질이 좋아지는 확장성**을 보였습니다. Flow Matching은 노이즈에서 이미지로 가는 속도(velocity)를 직접 학습하는 방식이고, 그중 Rectified Flow는 경로를 곧게 펴서 **적은 단계로 생성**할 수 있게 했습니다. 2024년에 나온 Stable Diffusion 3와 FLUX.1이 두 방향을 함께 쓰며, DiT는 13편, Flow Matching은 14편에서 다룹니다.
 
 ## 활용 분야와 확장 방향
 
@@ -119,7 +108,7 @@ _Transformer 구조와 Rectified Flow를 쓰는 Stable Diffusion 3가 생성한 
 - 판별 모델은 입력이 주어졌을 때의 레이블 분포 $$p(y \mid x)$$를 배우고, **생성 모델은 데이터 분포 $$p(x)$$를 배웁니다.**
 - 생성 모델은 분포를 배운 뒤 그 분포에서 샘플을 뽑아 새 이미지를 만들고, 조건을 주면 조건에 맞는 영역에서만 뽑습니다.
 - **VAE는 흐릿한 결과, GAN은 불안정한 학습, Diffusion은 느린 생성**이라는 한계를 남겼고, 다음 세대 모델이 이를 차례로 줄여 왔습니다.
-- 최근 모델은 Transformer 구조(DiT)와 속도(velocity)를 직접 학습하는 Flow Matching을 함께 쓰고, Rectified Flow는 그 경로를 곧게 펴 생성 단계를 줄였습니다.
+- 최근 모델은 Transformer 구조(DiT)와 Flow Matching 계열 학습 방식을 함께 써서 확장성과 생성 속도를 높였습니다.
 - 이미지 생성 기술은 비디오, 3D, 편집으로 넓어지고 있습니다.
 
 다음 편에서는 VAE, GAN, Diffusion을 나란히 놓고 각 모델이 이미지를 만드는 방식과 장단점을 비교합니다.
