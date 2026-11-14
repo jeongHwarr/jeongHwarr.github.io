@@ -8,6 +8,15 @@ toc: true
 genai: true
 genai_no: 1
 genai_session: 1
+faq:
+  - q: "생성 모델과 판별 모델은 무엇이 다른가요?"
+    a: "판별 모델은 입력이 주어졌을 때 레이블의 확률 p(y|x)를 배워 입력이 무엇인지 맞힙니다. 생성 모델은 데이터 자체의 분포 p(x)를 배우고, 그 분포에서 샘플을 뽑아 학습 데이터에 없던 새 데이터를 만듭니다."
+  - q: "VAE, GAN, Diffusion은 각각 어떤 한계가 있나요?"
+    a: "VAE는 결과가 흐릿하게 나오기 쉽습니다. GAN은 선명한 이미지를 만들지만 학습이 불안정하고 비슷한 이미지만 반복해 내는 모드 붕괴가 생길 수 있습니다. Diffusion은 학습이 안정적이고 품질이 좋지만 노이즈를 걷어 내는 단계를 많이 반복해야 해서 생성이 느립니다."
+  - q: "Flow Matching은 Diffusion과 무엇이 다른가요?"
+    a: "Diffusion은 단계마다 섞인 노이즈를 예측해 걷어 냅니다. Flow Matching은 노이즈에서 이미지로 가는 속도(velocity)를 신경망이 직접 학습합니다. 그중 Rectified Flow는 경로를 곧게 펴서 적은 단계로 생성할 수 있게 했습니다."
+  - q: "Stable Diffusion은 어떤 모델인가요?"
+    a: "이미지를 압축한 잠재 공간에서 Diffusion을 실행하는 Latent Diffusion을 바탕으로 2022년에 공개된 텍스트-이미지 생성 모델입니다. 2024년에 나온 Stable Diffusion 3는 Transformer 구조와 Rectified Flow를 함께 씁니다."
 image:
   path: /assets/img/genai/01/cover.png
   alt: "이미지 생성 모델 시리즈 1편, 생성 모델의 개념과 발전 과정"
@@ -113,6 +122,10 @@ DiT(Diffusion Transformer)는 Diffusion에서 노이즈를 예측하던 U-Net �
 - **VAE는 흐릿한 결과, GAN은 불안정한 학습, Diffusion은 느린 생성**이라는 한계를 남겼고, 다음 세대 모델이 이를 차례로 줄여 왔습니다.
 - 최근 모델은 Transformer 구조(DiT)와 Flow Matching 계열 학습 방식을 함께 써서 확장성과 생성 속도를 높였습니다.
 - 이미지 생성 기술은 비디오, 3D, 편집으로 넓어지고 있습니다.
+
+## 자주 묻는 질문
+
+{% include genai/faq.html %}
 
 다음 편에서는 VAE, GAN, Diffusion을 나란히 놓고 각 모델이 이미지를 만드는 방식과 장단점을 비교합니다.
 

@@ -1,0 +1,17 @@
+{%- comment -%}
+  자주 묻는 질문. front matter의 faq 목록(q, a)을 본문에 보여 주고, 같은 내용을 FAQPage 구조화 데이터로 내보낸다.
+  답은 평문으로 쓴다(수식 구분자 없이). 사용: 본문에 "## 자주 묻는 질문" 제목 다음 줄에 {% include genai/faq.html %}
+{%- endcomment -%}
+{%- if page.faq -%}
+<div class="gm-faq">
+{%- for item in page.faq %}
+  <div class="gm-faq-item">
+    <p class="gm-q">Q. {{ item.q }}</p>
+    <p class="gm-a">{{ item.a }}</p>
+  </div>
+{%- endfor %}
+</div>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{%- for item in page.faq -%}{"@type":"Question","name":{{ item.q | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ item.a | jsonify }}}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
+</script>
+{%- endif -%}

@@ -161,3 +161,10 @@ details.gm-more > summary::-webkit-details-marker { display: none; }
 details.gm-more > summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--gm-key-ink); transition: transform 0.2s; }
 details.gm-more[open] > summary::before { transform: rotate(90deg); }
 details.gm-more[open] { padding-bottom: 6px; }
+
+/* 자주 묻는 질문 */
+.gm-faq { margin: 1rem 0 1.4rem; }
+.gm-faq-item { padding: 10px 0; border-bottom: 1px solid var(--gm-line); }
+.gm-faq-item:last-child { border-bottom: 0; }
+.gm-faq .gm-q { margin: 0 0 4px; font-weight: 800; color: var(--gm-ink); }
+.gm-faq .gm-a { margin: 0; color: var(--gm-ink); }
