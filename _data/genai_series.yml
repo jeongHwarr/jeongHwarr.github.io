@@ -1,22 +1,22 @@
 # 주의: 키 이름에 no, yes, on, off를 쓰지 않는다. YAML 1.1에서 불리언으로 읽혀 Liquid에서 값을 찾지 못한다.
 # 「이미지 생성 모델」 시리즈 16편 목록. 목차 상자가 아직 공개하지 않은 편의 가제를 여기서 읽는다.
 # 공개 여부는 이 파일이 아니라 _posts/에 genai_no가 있는 글이 있는지로 정한다. 공개된 편은 글의 title을 쓴다.
-# session은 강의 차시 번호다(설계 1.1절). 가제는 강의 차시명과 겹치지 않게 짓고, 각 편을 쓸 때 바뀔 수 있다.
+# session은 강의 차시 번호다(설계 1.1절). 가제는 강의 차시명과 겹치지 않는 공식 명사형 제목으로 짓고, 각 편을 쓸 때 바뀔 수 있다.
 total: 16
 episodes:
-  - {episode: 1, session: 1, title: "생성 모델이란: VAE부터 Flow Matching까지 발전 흐름"}
-  - {episode: 2, session: 2, title: "VAE, GAN, Diffusion은 이미지를 어떻게 다르게 만드나"}
-  - {episode: 3, session: 3, title: "확률로 이미지를 다루는 법: 분포, 우도, 샘플링"}
-  - {episode: 4, session: 4, title: "VAE: 이미지를 압축했다가 다시 그리는 구조"}
-  - {episode: 5, session: 5, title: "VAE 손실 함수와 ELBO 유도"}
-  - {episode: 6, session: 6, title: "GAN: 생성자와 판별자의 경쟁 학습"}
-  - {episode: 7, session: 7, title: "GAN의 발전: StyleGAN까지 그리고 남은 문제"}
-  - {episode: 8, session: 9, title: "Diffusion: 노이즈를 걷어 내며 이미지를 만드는 방법"}
-  - {episode: 9, session: 10, title: "조건부 생성: 텍스트로 이미지를 원하는 방향으로 이끌기"}
-  - {episode: 10, session: 11, title: "잠재 공간에서 돌리는 Diffusion: Stable Diffusion 해부"}
-  - {episode: 11, session: 12, title: "ControlNet과 LoRA: 원하는 구도와 스타일로 생성하기"}
-  - {episode: 12, session: 13, title: "Diffusion 생성 단계 줄이기: 더 빠른 샘플링"}
-  - {episode: 13, session: 16, title: "DiT: U-Net 대신 Transformer를 쓰는 Diffusion"}
-  - {episode: 14, session: 17, title: "Flow Matching과 Rectified Flow: 노이즈에서 이미지로 곧게 가기"}
-  - {episode: 15, session: 21, title: "이미지를 넘어 비디오와 3D로"}
-  - {episode: 16, session: 22, title: "생성 AI의 저작권, 딥페이크, 그리고 다음 단계"}
+  - {episode: 1, session: 1, title: "생성 모델의 개념과 발전 과정"}
+  - {episode: 2, session: 2, title: "VAE, GAN, Diffusion의 생성 방식 비교"}
+  - {episode: 3, session: 3, title: "생성 모델을 위한 확률 분포와 샘플링"}
+  - {episode: 4, session: 4, title: "VAE의 구조와 재매개변수화 기법"}
+  - {episode: 5, session: 5, title: "VAE의 손실 함수와 ELBO 유도"}
+  - {episode: 6, session: 6, title: "GAN의 생성자, 판별자와 학습 목표"}
+  - {episode: 7, session: 7, title: "GAN의 발전 모델과 모드 붕괴"}
+  - {episode: 8, session: 9, title: "DDPM으로 보는 Diffusion 모델의 원리"}
+  - {episode: 9, session: 10, title: "조건부 생성과 Classifier-Free Guidance"}
+  - {episode: 10, session: 11, title: "Stable Diffusion의 구성 요소"}
+  - {episode: 11, session: 12, title: "ControlNet과 LoRA를 이용한 생성 제어"}
+  - {episode: 12, session: 13, title: "Diffusion 샘플링 가속 기법"}
+  - {episode: 13, session: 16, title: "Diffusion Transformer(DiT)의 구조"}
+  - {episode: 14, session: 17, title: "Flow Matching과 Rectified Flow의 학습 원리"}
+  - {episode: 15, session: 21, title: "비디오 생성과 3D 생성 기술"}
+  - {episode: 16, session: 22, title: "생성 AI의 저작권과 안전성"}

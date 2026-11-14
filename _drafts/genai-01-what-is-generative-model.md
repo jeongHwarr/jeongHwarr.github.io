@@ -1,5 +1,5 @@
 ---
-title: "[이미지 생성 모델 1] 생성 모델이란: VAE부터 Flow Matching까지 발전 흐름"
+title: "[이미지 생성 모델 1] 생성 모델의 개념과 발전 과정"
 description: "판별 모델과 생성 모델의 차이, 생성 모델이 이미지를 만드는 두 단계, VAE에서 Flow Matching까지 각 모델이 앞 모델의 한계를 어떻게 넘었는지 정리합니다."
 categories: [Generative AI, 이미지 생성 모델]
 tags: [Generative AI, VAE, GAN, Diffusion, Flow Matching]
@@ -51,7 +51,7 @@ genai_session: 1
 
 {% include genai/figs/01-two-models.html %}
 
-## 생성 모델이 이미지를 만드는 두 단계
+## 분포 학습과 샘플링
 
 생성 모델이 이미지를 만드는 과정은 분포 학습과 샘플링 두 단계로 나눌 수 있습니다.
 
@@ -68,121 +68,84 @@ genai_session: 1
 > 텍스트 프롬프트로 이미지를 만드는 모델도 원리는 같습니다. **프롬프트가 조건 역할을 합니다.** 모델에 조건을 넣는 구체적인 방법은 9편에서 다룹니다.
 {: .prompt-tip }
 
-## 앞 모델의 한계를 넘으며 이어진 흐름
+## 이미지 생성 모델의 발전 과정
 
-이미지 생성 모델은 앞 세대가 남긴 문제를 다음 세대가 푸는 방식으로 발전해 왔습니다. 아래 그림은 발전 과정을 세대별로 정리한 것입니다.
+이미지 생성 모델은 앞 세대가 남긴 문제를 다음 세대가 해결하는 방식으로 발전했습니다. 아래 그림은 세대별 특징과 한계를 정리한 것입니다.
 
 {% include genai/figs/01-generations.html %}
 
-### VAE: 잠재 공간에서 샘플링하지만 흐릿한 결과
+### VAE
 
-2013년에 제안된 VAE(Variational Autoencoder)는 이미지를 저차원 잠재 공간(latent space)으로 압축했다가 다시 복원하도록 학습합니다. **잠재 공간이 정규분포를 따르도록 학습합니다.** 따라서 정규분포에서 임의의 잠재 벡터를 뽑아도 새 이미지를 만들 수 있습니다. VAE 계열에서는 이후 VQ-VAE, β-VAE처럼 잠재 공간의 형태나 학습 목표를 바꾼 변형이 이어졌습니다.
+VAE(Variational Autoencoder)는 **이미지를 몇 개의 숫자로 요약했다가, 그 요약에서 이미지를 다시 그리는 모델**입니다. 인코더가 이미지를 저차원 잠재 벡터로 압축하고, 디코더가 잠재 벡터로부터 원래 이미지를 복원하도록 학습합니다.
+
+일반적인 오토인코더와 다른 점은 잠재 벡터가 놓이는 자리를 정리해 둔다는 것입니다. VAE는 학습 이미지의 잠재 벡터들이 정규분포 모양으로 모이도록 함께 학습합니다. 그래서 생성할 때는 인코더 없이 정규분포에서 임의의 점을 뽑아 디코더에 넣기만 하면 새 이미지가 나옵니다.
 
 {% include genai/figs/01-vae-mechanism.html %}
 
-VAE 논문은 화질 지표 대신 학습 목표인 하한과 로그 우도를 곡선으로 보고합니다(Figure 2, 3). 아래는 손글씨 숫자(MNIST)로 학습한 모델에서 잠재 벡터를 무작위로 뽑아 만든 이미지입니다. 잠재 공간이 2차원이면 획이 크게 뭉개지고, 20차원으로 늘리면 나아지지만 여전히 번진 획이 보입니다.
+결과가 흐릿한 이유도 학습 방식에서 나옵니다. 디코더는 픽셀 단위 복원 오차를 줄이도록 학습하는데, 하나의 잠재 벡터에 그럴듯한 이미지가 여러 개 대응하면 그 중간값을 그리는 편이 오차가 작습니다. 그래서 **세부 묘사가 평균처럼 뭉개지기 쉽습니다.**
 
-![VAE 논문의 MNIST 무작위 샘플](/assets/img/genai/01/paper-vae-samples.png)
-_잠재 공간 차원(2, 5, 10, 20)별 MNIST 무작위 샘플. 출처: Kingma & Welling (2013), [Figure 5](https://arxiv.org/abs/1312.6114)_
+![VAE가 생성한 손글씨 숫자](/assets/img/genai/01/paper-vae-samples.png)
+_VAE가 생성한 손글씨 숫자. 잠재 공간의 차원이 작을수록 획이 더 뭉개집니다. 출처: Kingma & Welling (2013), [Figure 5](https://arxiv.org/abs/1312.6114)_
 
-> **한계: 결과가 흐릿합니다.** 흐려지는 이유는 4편과 5편에서 손실 함수를 보며 설명합니다.
+> **한계: 결과가 흐릿합니다.** 손실 함수와 함께 4편과 5편에서 자세히 다룹니다.
 {: .prompt-warning }
 
-### GAN: 선명한 이미지, 불안정한 학습
+### GAN
 
-2014년에 나온 GAN(Generative Adversarial Network)은 이미지를 만드는 생성자(generator)와, 진짜 이미지와 생성된 이미지를 가려내는 판별자(discriminator)를 서로 경쟁시키며 학습합니다. GAN의 판별자는 앞서 설명한 판별 모델과 같은 종류의 네트워크입니다. 판별 결과를 통해 생성자가 더 그럴듯한 이미지를 만들도록 학습합니다. 생성자는 판별자를 속일 만큼 그럴듯한 이미지를 만들어야 하므로, **VAE보다 훨씬 선명한 결과가 나옵니다.** StyleGAN은 실제 사진과 구분하기 어려운 고해상도 얼굴 이미지로 주목받았고, Pix2Pix는 스케치를 사진으로 바꾸는 것처럼 한 이미지를 다른 이미지로 변환하는 데 쓰였습니다.
+GAN(Generative Adversarial Network)은 **이미지를 만드는 네트워크와 진짜인지 가려내는 네트워크를 함께 학습시키는 모델**입니다. 생성자(generator)는 무작위 노이즈를 받아 이미지를 만들고, 판별자(discriminator)는 진짜 이미지와 생성된 이미지를 구분합니다. 생성자는 판별자가 진짜로 판정하도록, 판별자는 생성된 이미지를 놓치지 않도록 서로 반대 목표로 학습합니다.
+
+이 구조에서는 판별자가 흐릿한 이미지를 쉽게 가짜로 가려냅니다. 생성자는 판별자를 통과하려고 질감과 윤곽 같은 세부를 살려야 하므로, **VAE보다 훨씬 선명한 이미지를 만듭니다.**
 
 {% include genai/figs/01-gan-mechanism.html %}
 
-첫 GAN 논문은 MNIST, TFD, CIFAR-10 같은 작은 데이터셋에서 샘플을 보여 줍니다. 아래 그림의 오른쪽 노란 테두리 열에는 바로 옆 생성 샘플과 가장 비슷한 실제 학습 이미지가 있습니다. 두 이미지를 나란히 배치해 모델이 학습 데이터를 외워서 출력하지 않았음을 보여 줍니다. FID가 나오기 전이라 이 논문은 Parzen window로 추정한 로그 우도를 보고했습니다(MNIST 225 ± 2, Table 1).
+문제는 두 네트워크의 목표가 서로를 기준으로 계속 바뀐다는 점입니다. 한쪽이 지나치게 강해지면 다른 쪽이 배울 신호를 잃고 학습이 흔들립니다. 생성자가 판별자를 잘 속이는 몇 가지 이미지에만 몰려 다양성을 잃는 **모드 붕괴(mode collapse)가** 생기기도 합니다.
 
-![GAN 논문의 생성 샘플](/assets/img/genai/01/paper-gan-samples.png)
-_선별하지 않은 생성 샘플. a) MNIST, b) TFD, c)와 d) CIFAR-10. 출처: Goodfellow et al. (2014), [Figure 2](https://arxiv.org/abs/1406.2661)_
+![StyleGAN이 생성한 얼굴](/assets/img/genai/01/paper-stylegan-samples.jpg){: w="460" }
+_GAN 계열 모델인 StyleGAN이 생성한 얼굴. 출처: Karras et al. (2019), [Figure 2](https://arxiv.org/abs/1812.04948)_
 
-5년 뒤 나온 StyleGAN은 고해상도 얼굴 데이터셋 FFHQ(1024×1024)에서 **FID 4.40**을 기록했습니다(Table 1). 같은 표에서 이전 모델 ProGAN은 8.04였습니다.
-
-<details class="gm-more" markdown="1">
-<summary>FID란?</summary>
-
-FID(Fréchet Inception Distance)는 생성 이미지 묶음과 실제 이미지 묶음을 이미지 분류 신경망(Inception)에 넣어 얻은 특징 분포가 얼마나 다른지를 잰 값입니다. **낮을수록 실제 이미지에 가깝습니다.** 다만 데이터셋이나 해상도가 다르면 값을 직접 비교할 수 없습니다. 샘플 수와 비교 기준 집합도 같아야 합니다.
-
-</details>
-
-![StyleGAN이 만든 얼굴](/assets/img/genai/01/paper-stylegan-samples.jpg){: w="460" }
-_StyleGAN이 만든 얼굴. 선별하지 않은 샘플이며, 일부 해상도에 truncation ψ=0.7을 적용했습니다. 출처: Karras et al. (2019), [Figure 2](https://arxiv.org/abs/1812.04948)_
-
-> **한계: 학습이 불안정합니다.** 두 네트워크의 균형이 깨지면 학습이 흔들리고, 생성자가 판별자를 잘 속이는 몇 가지 이미지만 되풀이해 내놓는 모드 붕괴(mode collapse)가 생기기도 합니다. GAN의 구조와 이 문제는 6편과 7편에서 다룹니다.
+> **한계: 학습이 불안정하고 모드 붕괴가 생길 수 있습니다.** GAN의 구조와 이 문제는 6편과 7편에서 다룹니다.
 {: .prompt-warning }
 
-### Diffusion: 안정적이고 품질도 좋지만 느린 생성
+### Diffusion 모델
 
-Diffusion 모델은 이미지에 노이즈를 조금씩 더해 완전한 노이즈로 만드는 과정을 정합니다. 신경망은 이 과정을 거꾸로 따라가며 노이즈를 제거하도록 학습합니다. 생성할 때는 순수한 노이즈에서 출발해 노이즈를 한 단계씩 걷어 냅니다. 아이디어는 2015년에 나왔고, 2020년 DDPM이 높은 품질을 보이면서 본격적으로 주목받았습니다. 두 네트워크를 경쟁시키지 않아 **학습이 안정적이고, 품질과 다양성도 함께 좋습니다.**
+Diffusion 모델은 **노이즈에서 출발해 노이즈를 조금씩 걷어 내며 이미지를 만드는 모델**입니다. 학습에는 두 방향이 있습니다. 깨끗한 이미지에 노이즈를 단계마다 조금씩 더해 완전한 노이즈로 만드는 방향은 정해진 공식으로 계산합니다. 신경망은 그 반대 방향, 즉 노이즈가 섞인 이미지를 받아 한 단계 덜 흐린 이미지로 되돌리는 법을 배웁니다.
 
-2022년에는 압축된 잠재 공간에서 Diffusion을 실행하는 Latent Diffusion이 Stable Diffusion이라는 공개 모델로 나오면서, 누구나 고품질 이미지를 직접 만들어 볼 수 있게 되었습니다. Diffusion의 원리는 8편, Stable Diffusion의 구조는 10편에서 다룹니다.
+노이즈에서 한 번에 이미지를 만드는 일은 어렵지만, 노이즈를 조금 걷어 내는 한 단계는 훨씬 쉬운 문제입니다. Diffusion은 **어려운 문제를 쉬운 문제 여러 개로 나눠 푸는 방식**이라 학습이 안정적이고, 품질과 다양성도 함께 좋습니다.
 
 {% include genai/figs/01-diffusion-mechanism.html %}
 
-DDPM은 CIFAR-10 비조건부 생성에서 FID 3.17과 IS 9.46을 보고했습니다(초록, Table 1). 같은 표에 실린 GAN 계열 결과(StyleGAN2+ADA, 3.26)보다 낮은 값입니다.
+대신 생성할 때 이 단계를 수십 번에서 많게는 1,000번까지 반복해야 해서 느립니다. 2022년에는 큰 이미지 대신 압축한 잠재 공간에서 같은 과정을 실행해 계산량을 줄인 Latent Diffusion이 Stable Diffusion으로 공개되면서, 누구나 고품질 이미지를 만들 수 있게 되었습니다.
 
-![DDPM 생성 샘플](/assets/img/genai/01/paper-ddpm-samples.jpg)
-_DDPM이 만든 CelebA-HQ 256×256 얼굴(왼쪽)과 CIFAR-10 샘플(오른쪽). 출처: Ho et al. (2020), [Figure 1](https://arxiv.org/abs/2006.11239)_
+![DDPM이 생성한 이미지](/assets/img/genai/01/paper-ddpm-samples.jpg)
+_Diffusion 모델(DDPM)이 생성한 얼굴과 CIFAR-10 이미지. 출처: Ho et al. (2020), [Figure 1](https://arxiv.org/abs/2006.11239)_
 
-Latent Diffusion은 압축한 잠재 공간에서 Diffusion을 실행해 계산량을 줄였고, 클래스 조건부 ImageNet 256×256에서 FID 3.60을 기록했습니다(LDM-4-G, guidance 1.5, Table 3). 같은 논문에서 텍스트 프롬프트로 이미지를 만드는 모델도 보였습니다.
-
-![Latent Diffusion의 텍스트-이미지 샘플](/assets/img/genai/01/paper-ldm-samples.jpg)
-_LAION으로 학습한 Latent Diffusion의 텍스트-이미지 샘플(DDIM 200단계, guidance 10). 출처: Rombach et al. (2022), [Figure 5](https://arxiv.org/abs/2112.10752)_
-
-> **한계: 생성이 느립니다.** 노이즈를 걷어 내는 단계를 수십 번에서 많게는 1,000번까지 반복해야 이미지 한 장이 나옵니다. 생성 속도를 높이는 방법은 12편에서 다룹니다.
+> **한계: 생성이 느립니다.** Diffusion의 원리는 8편, Stable Diffusion은 10편, 생성 속도를 높이는 방법은 12편에서 다룹니다.
 {: .prompt-warning }
 
-### DiT와 Flow Matching: 더 크게, 더 적은 단계로
+### DiT와 Flow Matching
 
-최근 모델은 구조와 학습 방식을 개선했습니다. **DiT는 구조를 바꿨습니다.** DiT(Diffusion Transformer)는 Diffusion에서 노이즈를 예측하던 U-Net 자리에 Transformer를 넣었고, 모델을 키울수록 품질이 꾸준히 좋아지는 확장성을 보여 주었습니다. Flow Matching과 Rectified Flow는 학습 방식을 바꿨습니다. 노이즈에서 이미지로 가는 경로가 곧아지도록 학습해, 더 적은 단계로 이미지를 만들 수 있게 합니다.
+최근 모델은 Diffusion을 두 방향으로 개선했습니다.
+
+- **DiT(Diffusion Transformer):** 이미지를 작은 패치로 잘라 문장의 단어처럼 나열하고, U-Net 대신 Transformer가 패치 사이의 관계를 계산합니다. 언어 모델처럼 **모델을 키울수록 품질이 꾸준히 좋아지는 확장성**이 장점입니다.
+- **Flow Matching과 Rectified Flow:** Diffusion은 노이즈에서 이미지까지 휘어진 길을 작은 보폭으로 여러 번 나눠 갑니다. Flow Matching은 **노이즈와 이미지를 잇는 곧은 길을 배우도록** 학습해, 큰 보폭으로 적은 단계 만에 도착할 수 있게 합니다.
 
 {% include genai/figs/01-dit-flow.html %}
 
-2024년에 나온 Stable Diffusion 3와 FLUX.1은 두 방향을 합친 모델로, Transformer 구조를 Rectified Flow 방식으로 학습합니다. 비디오 생성 모델 Sora도 Diffusion Transformer 구조를 씁니다. DiT는 13편, Flow Matching은 14편에서 다룹니다.
+2024년에 나온 Stable Diffusion 3와 FLUX.1은 두 방향을 합쳐, Transformer 구조를 Rectified Flow 방식으로 학습한 모델입니다. 비디오 생성 모델 Sora도 Diffusion Transformer 구조를 씁니다. DiT는 13편, Flow Matching은 14편에서 다룹니다.
 
-DiT-XL/2는 클래스 조건부 ImageNet 256×256에서 FID 2.27을 기록했습니다(guidance 1.5, 초록, Table 2). guidance 없이는 9.62입니다.
+![Stable Diffusion 3가 생성한 이미지](/assets/img/genai/01/paper-sd3-samples.jpg)
+_Transformer 구조와 Rectified Flow를 쓰는 Stable Diffusion 3가 생성한 이미지. 출처: Esser et al. (2024), [Figure 1](https://arxiv.org/abs/2403.03206)_
 
-![DiT 생성 샘플](/assets/img/genai/01/paper-dit-samples.jpg)
-_DiT-XL/2가 만든 ImageNet 512×512, 256×256 샘플(선별). 출처: Peebles & Xie (2023), [Figure 1](https://arxiv.org/abs/2212.09748), CC BY 4.0_
+### 모델별 특징 비교
 
-Rectified Flow는 경로를 곧게 펴서 적은 단계로 이미지를 만듭니다. CIFAR-10에서 **1단계만으로 FID 4.85**를 기록했는데, 경로를 한 번 더 곧게 편 모델(2-Rectified Flow)에 증류를 더한 결과입니다(Table 1a). 증류 없이 1단계로 만들면 12.21입니다.
+| 계열 | 등장 | 대표 모델 | 특징 | 한계 |
+|---|---|---|---|---|
+| VAE | 2013 | VQ-VAE, β-VAE | 잠재 공간에서 샘플링 | 결과가 흐릿함 |
+| GAN | 2014 | Pix2Pix, ProGAN, StyleGAN | 선명한 이미지 | 학습 불안정, 모드 붕괴 |
+| Diffusion | 2015 (DDPM 2020) | DALL·E 2, Imagen, Stable Diffusion | 안정적인 학습, 높은 품질과 다양성 | 생성이 느림 |
+| DiT, Flow Matching | 2022 | Stable Diffusion 3, FLUX.1, Sora | 모델 확장성, 적은 단계 생성 | - |
 
-![Rectified Flow 생성 샘플](/assets/img/genai/01/paper-rectflow-samples.jpg)
-_Rectified Flow가 만든 256×256 샘플(LSUN Church, CelebA-HQ, LSUN Bedroom, AFHQ Cat). 출처: Liu et al. (2023), [Figure 11](https://arxiv.org/abs/2209.03003)_
-
-Stable Diffusion 3는 Transformer 구조와 Rectified Flow를 합쳐 규모를 키운 모델입니다. 프롬프트를 얼마나 정확히 따르는지 재는 GenEval에서 8B 모델이 **종합 0.74**로 DALL·E 3(0.67)보다 높았습니다(Table 5). 다만 위치 관계 항목은 DALL·E 3가 더 높았습니다.
-
-![Stable Diffusion 3 생성 샘플](/assets/img/genai/01/paper-sd3-samples.jpg)
-_Stable Diffusion 3 8B 모델의 고해상도 샘플. 글자 표현, 프롬프트 반영, 공간 배치를 보여 줍니다. 출처: Esser et al. (2024), [Figure 1](https://arxiv.org/abs/2403.03206)_
-
-### 한눈에 보기
-
-| 계열 | 등장 | 대표 모델 | 특징과 한계 |
-|---|---|---|---|
-| VAE | 2013 | VQ-VAE, β-VAE | 잠재 공간에서 샘플링 가능, 결과가 흐릿함 |
-| GAN | 2014 | Pix2Pix, ProGAN, StyleGAN | 선명한 이미지, 학습이 불안정하고 모드 붕괴 |
-| Diffusion | 2015 (DDPM 2020) | DALL·E 2, Imagen, Stable Diffusion | 안정적인 학습과 높은 품질, 생성이 느림 |
-| DiT, Flow Matching | 2022 | Stable Diffusion 3, FLUX.1, Sora | 모델을 키울수록 좋아지는 구조, 적은 단계로 생성 |
-
-원 논문들이 보고한 대표 결과를 모으면 다음과 같습니다.
-
-| 모델 | 결과 | 조건 | 위치 |
-|---|---|---|---|
-| GAN (2014) | Parzen 로그 우도 225 ± 2 | MNIST | Table 1 |
-| StyleGAN (2019) | FID 4.40 | FFHQ 1024×1024 | Table 1 |
-| DDPM (2020) | FID 3.17, IS 9.46 | CIFAR-10 비조건부 | Table 1 |
-| Latent Diffusion (2022) | FID 3.60 | ImageNet 256×256 클래스 조건부, guidance 1.5 | Table 3 |
-| DiT-XL/2 (2023) | FID 2.27 | ImageNet 256×256 클래스 조건부, guidance 1.5 | Table 2 |
-| Rectified Flow (2023) | FID 4.85 (1단계) | CIFAR-10, 2-Rectified Flow와 증류 | Table 1(a) |
-| Stable Diffusion 3 (2024) | GenEval 종합 0.74 | 텍스트-이미지, 8B, 1024×1024 | Table 5 |
-
-> **표의 수치는 서로 직접 비교할 수 없습니다.** 데이터셋과 해상도가 다릅니다. 조건부 여부와 guidance, 측정 기준도 다릅니다. 각 논문이 발표 당시 달성한 결과로 이해해야 합니다. VAE 원 논문은 FID 같은 화질 지표를 보고하지 않았고, FID는 2017년에 나왔습니다.
-{: .prompt-warning }
-
-## 쓰이는 곳과 넓어지는 방향
+## 활용 분야와 확장 방향
 
 **이미지 생성 모델은 여러 산업에서 쓰입니다.** 온라인 쇼핑몰에서는 상품 사진의 배경을 바꾸거나 한 상품을 여러 연출로 만드는 데 쓰고, 패션에서는 옷 사진을 모델이 입은 모습으로 합성하는 가상 피팅에 씁니다. 게임에서는 콘셉트 아트와 배경 텍스처의 초안을 빠르게 만드는 데 쓰입니다. 의료처럼 학습 데이터를 모으기 어려운 분야에서는 CT나 MRI 영상을 합성해 부족한 학습 데이터를 보강하는 연구가 이어지고 있습니다.
 
@@ -192,7 +155,7 @@ _Stable Diffusion 3 8B 모델의 고해상도 샘플. 글자 표현, 프롬프�
 
 비디오는 1분 안팎의 짧은 클립에서는 높은 품질을 보이지만, 긴 영상에서 인물과 장면을 일관되게 유지하는 일은 아직 풀어야 할 과제입니다. 3D에서는 여러 시점의 2D 이미지를 먼저 만들고 이를 바탕으로 3D 형상을 복원하는 방식이 많이 쓰입니다. 비디오와 3D 생성은 15편에서 자세히 다룹니다.
 
-## 정리
+## 요약
 
 - 판별 모델은 입력이 주어졌을 때의 레이블 분포 $$p(y \mid x)$$를 배우고, **생성 모델은 데이터 분포 $$p(x)$$를 배웁니다.**
 - 생성 모델은 분포를 배운 뒤 그 분포에서 샘플을 뽑아 새 이미지를 만들고, 조건을 주면 조건에 맞는 영역에서만 뽑습니다.
