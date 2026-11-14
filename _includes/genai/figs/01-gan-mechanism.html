@@ -1,0 +1,44 @@
+<figure class="gm-fig tex2jax_ignore" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 290" role="img" aria-label="GAN의 생성자가 노이즈로 가짜 이미지를 만들고, 판별자가 진짜와 가짜를 가려내며, 판별 결과가 생성자에게 되돌아가 생성자가 더 그럴듯한 이미지를 만들도록 학습하는 세 단계">
+    <defs><marker id="gm-01-gan-mechanism-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker>
+          <marker id="gm-01-gan-mechanism-karrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-key"/></marker></defs>
+    <g class="gm-step" data-step="1">
+      <g class="gm-fill-mute">
+        <rect x="20" y="86" width="12" height="12"/><rect x="36" y="86" width="12" height="12" fill-opacity="0.4"/><rect x="52" y="86" width="12" height="12" fill-opacity="0.7"/>
+        <rect x="20" y="102" width="12" height="12" fill-opacity="0.5"/><rect x="36" y="102" width="12" height="12"/><rect x="52" y="102" width="12" height="12" fill-opacity="0.3"/>
+        <rect x="20" y="118" width="12" height="12" fill-opacity="0.8"/><rect x="36" y="118" width="12" height="12" fill-opacity="0.35"/><rect x="52" y="118" width="12" height="12" fill-opacity="0.6"/>
+      </g>
+      <text x="42" y="158" text-anchor="middle" font-size="20" class="gm-text-mute">노이즈 z</text>
+      <path d="M70,108 L96,108" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-gan-mechanism-arrow)"/>
+      <rect x="102" y="76" width="120" height="64" rx="10" class="gm-tint-cyan gm-stroke-cyan" stroke-width="2"/>
+      <text x="162" y="115" text-anchor="middle" font-size="22" class="gm-text-cyan">생성자 G</text>
+      <path d="M226,108 L252,108" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-gan-mechanism-arrow)"/>
+      <rect x="258" y="66" width="84" height="84" rx="10" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
+      <path d="M278,90 L322,90 L294,138" fill="none" class="gm-stroke-ink" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="300" y="178" text-anchor="middle" font-size="20" class="gm-text-ink">가짜 이미지</text>
+    </g>
+    <g class="gm-step" data-step="2">
+      <rect x="258" y="196" width="84" height="84" rx="10" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
+      <path d="M276,220 Q300,212 322,218 L296,268" fill="none" class="gm-stroke-ink" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="204" y="245" text-anchor="end" font-size="20" class="gm-text-ink">진짜 이미지</text>
+      <path d="M346,108 C380,108 384,140 404,140" fill="none" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-gan-mechanism-arrow)"/>
+      <path d="M346,238 C380,238 384,180 404,180" fill="none" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-gan-mechanism-arrow)"/>
+      <rect x="410" y="128" width="130" height="64" rx="10" class="gm-tint-cyan gm-stroke-cyan" stroke-width="2"/>
+      <text x="475" y="167" text-anchor="middle" font-size="22" class="gm-text-cyan">판별자 D</text>
+      <path d="M544,160 L566,160" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-gan-mechanism-arrow)"/>
+      <rect x="572" y="118" width="128" height="36" rx="18" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+      <text x="636" y="143" text-anchor="middle" font-size="20" class="gm-text-ink">진짜 0.87</text>
+      <rect x="572" y="166" width="128" height="36" rx="18" class="gm-fill-key"/>
+      <text x="636" y="191" text-anchor="middle" font-size="20" class="gm-text-onfill">가짜 0.21</text>
+    </g>
+    <g class="gm-step" data-step="3">
+      <path d="M636,116 C636,30 400,22 180,30 C162,32 162,52 162,70" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#gm-01-gan-mechanism-karrow)"/>
+      <text x="430" y="58" text-anchor="middle" font-size="20" class="gm-text-key">판별 결과로 생성자를 고침</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 생성자 G는 무작위 노이즈 z를 받아 가짜 이미지를 만듭니다.</li>
+    <li>② 판별자 D는 진짜 이미지와 가짜 이미지를 받아 각각이 진짜일 확률을 냅니다. 판별자는 진짜는 1에, 가짜는 0에 가깝게 맞히도록 학습합니다.</li>
+    <li>③ 생성자는 판별자가 가짜를 진짜로 착각하도록 고쳐 나갑니다. 둘의 균형이 맞으면 선명한 이미지가 나오지만, 한쪽으로 기울면 학습이 흔들립니다.</li>
+  </ol>
+</figure>
