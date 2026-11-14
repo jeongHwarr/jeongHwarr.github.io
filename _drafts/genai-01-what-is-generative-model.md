@@ -76,51 +76,18 @@ genai_session: 1
 
 ### VAE
 
-VAE(Variational Autoencoder)는 **이미지를 몇 개의 숫자로 요약했다가, 그 요약에서 이미지를 다시 그리는 모델**입니다. 인코더가 이미지를 저차원 잠재 벡터로 압축하고, 디코더가 잠재 벡터로부터 원래 이미지를 복원하도록 학습합니다.
-
-일반적인 오토인코더와 다른 점은 잠재 벡터가 놓이는 자리를 정리해 둔다는 것입니다. VAE는 학습 이미지의 잠재 벡터들이 정규분포 모양으로 모이도록 함께 학습합니다. 그래서 생성할 때는 인코더 없이 정규분포에서 임의의 점을 뽑아 디코더에 넣기만 하면 새 이미지가 나옵니다.
-
-{% include genai/figs/01-vae-mechanism.html %}
-
-결과가 흐릿한 이유도 학습 방식에서 나옵니다. 디코더는 픽셀 단위 복원 오차를 줄이도록 학습하는데, 하나의 잠재 벡터에 그럴듯한 이미지가 여러 개 대응하면 그 중간값을 그리는 편이 오차가 작습니다. 그래서 **세부 묘사가 평균처럼 뭉개지기 쉽습니다.**
-
-![VAE가 생성한 손글씨 숫자](/assets/img/genai/01/paper-vae-samples.png)
-_VAE가 생성한 손글씨 숫자. 잠재 공간의 차원이 작을수록 획이 더 뭉개집니다. 출처: Kingma & Welling (2013), [Figure 5](https://arxiv.org/abs/1312.6114)_
-
-> **한계: 결과가 흐릿합니다.** 손실 함수와 함께 4편과 5편에서 자세히 다룹니다.
-{: .prompt-warning }
+VAE(Variational Autoencoder)는 이미지를 저차원 잠재 공간으로 압축했다가 다시 복원하도록 학습하는 모델입니다. 잠재 공간을 정규분포 모양으로 정리해 두기 때문에, **정규분포에서 뽑은 점으로 새 이미지를 만들 수 있습니다.** 다만 결과가 흐릿하다는 한계가 있었습니다.
 
 ### GAN
 
-GAN(Generative Adversarial Network)은 **이미지를 만드는 네트워크와 진짜인지 가려내는 네트워크를 함께 학습시키는 모델**입니다. 생성자(generator)는 무작위 노이즈를 받아 이미지를 만들고, 판별자(discriminator)는 진짜 이미지와 생성된 이미지를 구분합니다. 생성자는 판별자가 진짜로 판정하도록, 판별자는 생성된 이미지를 놓치지 않도록 서로 반대 목표로 학습합니다.
-
-이 구조에서는 판별자가 흐릿한 이미지를 쉽게 가짜로 가려냅니다. 생성자는 판별자를 통과하려고 질감과 윤곽 같은 세부를 살려야 하므로, **VAE보다 훨씬 선명한 이미지를 만듭니다.**
-
-{% include genai/figs/01-gan-mechanism.html %}
-
-문제는 두 네트워크의 목표가 서로를 기준으로 계속 바뀐다는 점입니다. 한쪽이 지나치게 강해지면 다른 쪽이 배울 신호를 잃고 학습이 흔들립니다. 생성자가 판별자를 잘 속이는 몇 가지 이미지에만 몰려 다양성을 잃는 **모드 붕괴(mode collapse)가** 생기기도 합니다.
-
-![StyleGAN이 생성한 얼굴](/assets/img/genai/01/paper-stylegan-samples.jpg){: w="460" }
-_GAN 계열 모델인 StyleGAN이 생성한 얼굴. 출처: Karras et al. (2019), [Figure 2](https://arxiv.org/abs/1812.04948)_
-
-> **한계: 학습이 불안정하고 모드 붕괴가 생길 수 있습니다.** GAN의 구조와 이 문제는 6편과 7편에서 다룹니다.
-{: .prompt-warning }
+GAN(Generative Adversarial Network)은 이미지를 만드는 생성자와 진짜인지 가려내는 판별자를 함께 학습시키는 모델입니다. 판별자를 통과해야 하므로 **VAE보다 훨씬 선명한 이미지를 만들지만**, 두 네트워크의 균형을 맞추기 어려워 학습이 불안정했습니다.
 
 ### Diffusion 모델
 
-Diffusion 모델은 **노이즈에서 출발해 노이즈를 조금씩 걷어 내며 이미지를 만드는 모델**입니다. 학습에는 두 방향이 있습니다. 깨끗한 이미지에 노이즈를 단계마다 조금씩 더해 완전한 노이즈로 만드는 방향은 정해진 공식으로 계산합니다. 신경망은 그 반대 방향, 즉 노이즈가 섞인 이미지를 받아 한 단계 덜 흐린 이미지로 되돌리는 법을 배웁니다.
+Diffusion 모델은 노이즈에서 출발해 노이즈를 조금씩 걷어 내며 이미지를 만드는 모델입니다. **학습이 안정적이고 품질과 다양성도 좋지만**, 걷어 내는 단계를 수십 번에서 많게는 1,000번까지 반복해야 해서 생성이 느렸습니다. 2022년에는 압축한 잠재 공간에서 같은 과정을 실행하는 Latent Diffusion이 Stable Diffusion으로 공개되면서 이미지 생성이 대중화되었습니다.
 
-노이즈에서 한 번에 이미지를 만드는 일은 어렵지만, 노이즈를 조금 걷어 내는 한 단계는 훨씬 쉬운 문제입니다. Diffusion은 **어려운 문제를 쉬운 문제 여러 개로 나눠 푸는 방식**이라 학습이 안정적이고, 품질과 다양성도 함께 좋습니다.
-
-{% include genai/figs/01-diffusion-mechanism.html %}
-
-대신 생성할 때 이 단계를 수십 번에서 많게는 1,000번까지 반복해야 해서 느립니다. 2022년에는 큰 이미지 대신 압축한 잠재 공간에서 같은 과정을 실행해 계산량을 줄인 Latent Diffusion이 Stable Diffusion으로 공개되면서, 누구나 고품질 이미지를 만들 수 있게 되었습니다.
-
-![DDPM이 생성한 이미지](/assets/img/genai/01/paper-ddpm-samples.jpg)
-_Diffusion 모델(DDPM)이 생성한 얼굴과 CIFAR-10 이미지. 출처: Ho et al. (2020), [Figure 1](https://arxiv.org/abs/2006.11239)_
-
-> **한계: 생성이 느립니다.** Diffusion의 원리는 8편, Stable Diffusion은 10편, 생성 속도를 높이는 방법은 12편에서 다룹니다.
-{: .prompt-warning }
+> 세 모델이 각각 어떤 원리로 이미지를 만들고 왜 이런 장단점이 생기는지는 2편에서 그림과 함께 비교합니다.
+{: .prompt-info }
 
 ### DiT와 Flow Matching
 
@@ -136,15 +103,6 @@ _Diffusion 모델(DDPM)이 생성한 얼굴과 CIFAR-10 이미지. 출처: Ho et
 
 ![Stable Diffusion 3가 생성한 이미지](/assets/img/genai/01/paper-sd3-samples.jpg)
 _Transformer 구조와 Rectified Flow를 쓰는 Stable Diffusion 3가 생성한 이미지. 출처: Esser et al. (2024), [Figure 1](https://arxiv.org/abs/2403.03206)_
-
-### 모델별 특징 비교
-
-| 계열 | 등장 | 대표 모델 | 특징 | 한계 |
-|---|---|---|---|---|
-| VAE | 2013 | VQ-VAE, β-VAE | 잠재 공간에서 샘플링 | 결과가 흐릿함 |
-| GAN | 2014 | Pix2Pix, ProGAN, StyleGAN | 선명한 이미지 | 학습 불안정, 모드 붕괴 |
-| Diffusion | 2015 (DDPM 2020) | DALL·E 2, Imagen, Stable Diffusion | 안정적인 학습, 높은 품질과 다양성 | 생성이 느림 |
-| DiT, Flow Matching | 2022 | Stable Diffusion 3, FLUX.1, Sora | 모델 확장성(DiT), 속도 직접 학습(Flow Matching), 적은 단계 생성(Rectified Flow) | - |
 
 ## 활용 분야와 확장 방향
 
@@ -175,7 +133,6 @@ _Transformer 구조와 Rectified Flow를 쓰는 Stable Diffusion 3가 생성한 
 - Kingma, D. P., & Welling, M. (2013). Auto-Encoding Variational Bayes. arXiv:1312.6114.
 - Goodfellow, I. et al. (2014). Generative Adversarial Nets. NeurIPS.
 - Sohl-Dickstein, J. et al. (2015). Deep Unsupervised Learning using Nonequilibrium Thermodynamics. ICML.
-- Karras, T., Laine, S., & Aila, T. (2019). A Style-Based Generator Architecture for Generative Adversarial Networks. CVPR.
 - Ho, J., Jain, A., & Abbeel, P. (2020). Denoising Diffusion Probabilistic Models. NeurIPS.
 - Rombach, R. et al. (2022). High-Resolution Image Synthesis with Latent Diffusion Models. CVPR.
 - Peebles, W., & Xie, S. (2023). Scalable Diffusion Models with Transformers. ICCV.

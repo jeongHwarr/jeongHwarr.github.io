@@ -1,17 +1,17 @@
 <figure class="gm-fig tex2jax_ignore" data-gm="steps">
   <svg class="gm-svg" viewBox="0 0 720 280" role="img" aria-label="VAE가 이미지를 잠재 벡터로 압축하고, 잠재 공간을 정규분포 모양으로 정리한 뒤, 정규분포에서 뽑은 벡터를 디코더가 이미지로 만들지만 결과가 흐릿한 세 단계">
     <defs>
-      <marker id="gm-01-vae-mechanism-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker>
-      <filter id="gm-01-vae-mechanism-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter>
+      <marker id="gm-02-vae-mechanism-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker>
+      <filter id="gm-02-vae-mechanism-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter>
     </defs>
     <g class="gm-step" data-step="1">
       <rect x="14" y="80" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
       <path d="M36,104 L82,104 L54,156" fill="none" class="gm-stroke-ink" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       <text x="59" y="200" text-anchor="middle" font-size="20" class="gm-text-ink">이미지</text>
-      <path d="M108,125 L126,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-vae-mechanism-arrow)"/>
+      <path d="M108,125 L126,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
       <polygon points="132,70 236,102 236,148 132,180" class="gm-tint-blue gm-stroke-blue" stroke-width="2"/>
       <text x="184" y="132" text-anchor="middle" font-size="20" class="gm-text-blue">인코더</text>
-      <path d="M240,125 L268,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-vae-mechanism-arrow)"/>
+      <path d="M240,125 L268,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
     </g>
     <g class="gm-step" data-step="2">
       <ellipse cx="350" cy="125" rx="70" ry="58" class="gm-tint-blue gm-stroke-blue" stroke-width="1.5" stroke-dasharray="5 5"/>
@@ -25,12 +25,12 @@
     </g>
     <g class="gm-step" data-step="3">
       <g class="gm-jitter"><circle cx="360" cy="108" r="9" class="gm-fill-key"/></g>
-      <path d="M371,108 C420,90 440,110 462,120" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-01-vae-mechanism-arrow)"/>
+      <path d="M371,108 C420,90 440,110 462,120" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
       <polygon points="466,102 570,70 570,180 466,148" class="gm-tint-blue gm-stroke-blue" stroke-width="2"/>
       <text x="518" y="132" text-anchor="middle" font-size="20" class="gm-text-blue">디코더</text>
-      <path d="M574,125 L596,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-01-vae-mechanism-arrow)"/>
+      <path d="M574,125 L596,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
       <rect x="602" y="80" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
-      <path d="M624,104 L670,104 L642,156" fill="none" class="gm-stroke-ink" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#gm-01-vae-mechanism-blur)"/>
+      <path d="M624,104 L670,104 L642,156" fill="none" class="gm-stroke-ink" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#gm-02-vae-mechanism-blur)"/>
       <text x="647" y="200" text-anchor="middle" font-size="20" class="gm-text-key">흐릿한 결과</text>
     </g>
   </svg>
