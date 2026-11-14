@@ -22,12 +22,22 @@
     return Math.max(0.05, Math.min(base, 0.6 * window.innerHeight / h));
   }
 
-  function onceVisible(target, ratio, fn) {
+  /* 한 번만 fn을 부른다. 화면 크기가 바뀌면(회전 등) 아직 부르기 전일 때 기준 비율을 다시 계산한다. */
+  function onceVisible(target, base, fn) {
     if (!('IntersectionObserver' in window)) { fn(); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); fn(); } });
-    }, { threshold: ratio });
-    io.observe(target);
+    var io = null, done = false, raf = 0;
+    function observe() {
+      if (io) io.disconnect();
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !done) { done = true; io.disconnect(); window.removeEventListener('resize', onResize); fn(); }
+        });
+      }, { threshold: visibleRatio(target, base) });
+      io.observe(target);
+    }
+    function onResize() { cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { if (!done) observe(); }); }
+    window.addEventListener('resize', onResize);
+    observe();
   }
 
   function button(cls, text, label) {
@@ -65,7 +75,7 @@
     if (caps.length !== N) console.warn('[gm] 단계 수(' + N + ')와 캡션 수(' + caps.length + ')가 다릅니다', root);
     root.classList.add('gm-on', 'tex2jax_ignore');
     var ui = controls(root, N, false);
-    var cur = 0, timer = null, touched = false;
+    var cur = 0, timer = null, touched = false, played = false;
 
     function show(n) {
       cur = n;
@@ -78,7 +88,7 @@
     }
     function stop() { clearTimeout(timer); timer = null; ui.badge.classList.remove('gm-on'); }
     function play() {
-      stop();
+      stop(); played = true;
       if (REDUCED) { show(N); return; }
       show(0);
       ui.badge.classList.add('gm-on');
@@ -97,7 +107,7 @@
     if (REDUCED) { show(N); return; }
     show(0);
     /* 자동 재생 전에 사용자가 먼저 조작했으면 자동 재생하지 않는다 */
-    onceVisible(root, visibleRatio(root, 0.4), function () { if (!touched) play(); });
+    onceVisible(root, 0.4, function () { if (!touched && !played) play(); });
   }
 
   /* ───────── 수식 유도 (data-gm="deriv") ───────── */
@@ -143,7 +153,7 @@
     var fallback = el('div', 'gm-fallback');
     fallback.textContent = '수식을 불러오는 중입니다.\n' + R.map(function (r) { return texOf(r.l).concat(texOf(r.r)).join(' '); }).join('\n');
 
-    var rows = [], hideT = [], fullGuide = null, ui = null, cur = 0, auto = null, fullTimer = null, touched = false;
+    var rows = [], hideT = [], fullGuide = null, ui = null, cur = 0, auto = null, fullTimer = null, touched = false, played = false;
 
     /* 항마다 따로 렌더하면 기준선이 어긋나므로, 괄호와 짧은 연산자(=, +, \ge 등)를 뺀 항에 높이 맞춤을 붙인다 */
     function math(tex) {
@@ -342,12 +352,20 @@
       root.classList.add('gm-full');
     }
     function scheduleFull() { clearTimeout(fullTimer); fullTimer = setTimeout(enterFull, FULL_DELAY_MS); }
-    function autoplay() {
+    /* first: 화면에 처음 들어왔을 때의 재생. 첫 줄은 이미 보이므로 다시 숨기거나 등장시키지 않는다(깜빡임 방지). */
+    function autoplay(first) {
+      var initial = first === true && !played;
+      played = true;
       stopAuto(); clearTimeout(fullTimer); root.classList.remove('gm-full');
       if (REDUCED) { enterFull(); return; }
-      rows.forEach(function (r, k) { clearTimeout(hideT[k]); hideT[k] = 0; r.classList.add('gm-pending'); cancelAnims(r); });
+      rows.forEach(function (r, k) {
+        if (initial && k === 0) return;
+        clearTimeout(hideT[k]); hideT[k] = 0; r.classList.add('gm-pending'); cancelAnims(r);
+      });
       stage.querySelectorAll('.gm-ghost').forEach(function (g) { g.remove(); });
-      cur = 0; reveal(0); ui.badge.classList.add('gm-on');
+      cur = 0;
+      if (initial) { unhide(0); setCur(0); syncUi(0); } else reveal(0);
+      ui.badge.classList.add('gm-on');
       var tick = function () {
         go(cur + 1);
         if (cur === N - 1) { auto = null; ui.badge.classList.remove('gm-on'); scheduleFull(); }
@@ -385,7 +403,7 @@
       if (REDUCED) { enterFull(); return; }
       /* 자동 재생 전에도 첫 줄은 보여 두고, 사용자가 먼저 조작했으면 자동 재생하지 않는다 */
       cur = 0; unhide(0); setCur(0); syncUi(0);
-      onceVisible(stage, visibleRatio(stage, 0.35), function () { if (!touched) autoplay(); });
+      onceVisible(stage, 0.35, function () { if (!touched && !played) autoplay(true); });
     }
 
     waitMathJax(build, function () { stage.appendChild(fallback); });
