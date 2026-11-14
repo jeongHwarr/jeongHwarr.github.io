@@ -1,0 +1,31 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# {{ site.title }}
+
+> {{ site.description | strip_newlines }}
+
+이 파일은 AI 검색과 언어 모델이 사이트 구조를 파악하도록 돕는 목록입니다(llms.txt 형식). 글 주소마다 한 줄 설명을 붙였습니다.
+
+## 이미지 생성 모델 시리즈
+
+생성 모델의 원리를 VAE, GAN, Diffusion, DiT, Flow Matching 순서로 정리하는 연재입니다.
+{% assign gm_posts = site.posts | where_exp: "p", "p.genai_no" | sort: "genai_no" %}
+{% for p in gm_posts -%}
+{%- assign d = p.description | default: p.excerpt | strip_html | strip_newlines | strip | truncate: 200 -%}
+- [{{ p.title }}]({{ site.url }}{{ p.url }}){% if d != "" %}: {{ d }}{% endif %}
+{% endfor %}
+## 전체 글
+{% for p in site.posts -%}
+{%- if p.genai_no or p.sitemap == false %}{% continue %}{% endif -%}
+{%- assign d = p.description | default: p.excerpt | strip_html | strip_newlines | strip | truncate: 160 %}
+- [{{ p.title }}]({{ site.url }}{{ p.url }}){% if d != "" %}: {{ d }}{% endif %}
+{%- endfor %}
+
+## 기타
+
+- [소개]({{ site.url }}/about/)
+- [사이트맵]({{ site.url }}/sitemap.xml)
+- [RSS]({{ site.url }}/feed.xml)
