@@ -1,0 +1,56 @@
+<figure class="gm-fig tex2jax_ignore" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 300" role="img" aria-label="오토인코더는 이미지마다 잠재 공간의 점 하나를 두어 점 사이 빈자리에서 뽑으면 깨진 이미지가 나오고, VAE는 이미지마다 작은 분포를 두고 표준정규분포 안에 겹쳐 모아 아무 점에서 뽑아도 그럴듯한 이미지가 나오는 네 단계">
+    <defs><marker id="gm-02-latent-space-karrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-key"/></marker></defs>
+    <g class="gm-step" data-step="1">
+      <text x="125" y="30" text-anchor="middle" font-size="20" class="gm-text-ink">오토인코더</text>
+      <rect x="15" y="48" width="220" height="200" rx="12" class="gm-fill-panel gm-stroke-mute" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <g class="gm-fill-mute">
+        <circle cx="52" cy="88" r="5"/><circle cx="74" cy="100" r="5"/><circle cx="58" cy="114" r="5"/>
+        <circle cx="186" cy="78" r="5"/><circle cx="204" cy="96" r="5"/><circle cx="182" cy="102" r="5"/>
+        <circle cx="66" cy="206" r="5"/><circle cx="92" cy="216" r="5"/><circle cx="76" cy="230" r="5"/>
+        <circle cx="196" cy="214" r="5"/><circle cx="212" cy="228" r="5"/>
+      </g>
+      <text x="96" y="84" font-size="20" class="gm-text-ink">0</text>
+      <text x="160" y="80" font-size="20" class="gm-text-ink">1</text>
+      <text x="108" y="214" font-size="20" class="gm-text-ink">7</text>
+      <text x="176" y="236" font-size="20" class="gm-text-ink">4</text>
+      <text x="125" y="282" text-anchor="middle" font-size="20" class="gm-text-mute">이미지마다 점 하나</text>
+    </g>
+    <g class="gm-step" data-step="2">
+      <circle cx="140" cy="160" r="9" class="gm-fill-key"/>
+      <path d="M151,158 L250,150" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-02-latent-space-karrow)"/>
+      <rect x="258" y="112" width="74" height="74" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
+      <path d="M272,132 Q290,170 300,128 T322,150 M276,166 Q296,150 318,172" fill="none" class="gm-stroke-ink" stroke-width="5" stroke-linecap="round" stroke-opacity="0.75"/>
+      <text x="295" y="214" text-anchor="middle" font-size="20" class="gm-text-key">깨진 이미지</text>
+    </g>
+    <g class="gm-step" data-step="3">
+      <line x1="355" y1="20" x2="355" y2="280" class="gm-stroke-mute" stroke-width="1.5" stroke-dasharray="6 6"/>
+      <text x="485" y="30" text-anchor="middle" font-size="20" class="gm-text-blue">VAE</text>
+      <rect x="375" y="48" width="220" height="200" rx="12" class="gm-fill-panel gm-stroke-mute" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <circle cx="485" cy="148" r="84" fill="none" class="gm-stroke-blue" stroke-width="2" stroke-dasharray="8 6"/>
+      <ellipse cx="450" cy="118" rx="44" ry="32" class="gm-tint-blue gm-stroke-blue" stroke-width="1.5"/>
+      <ellipse cx="522" cy="114" rx="40" ry="30" class="gm-tint-blue gm-stroke-blue" stroke-width="1.5"/>
+      <ellipse cx="458" cy="180" rx="44" ry="30" class="gm-tint-blue gm-stroke-blue" stroke-width="1.5"/>
+      <ellipse cx="522" cy="180" rx="38" ry="30" class="gm-tint-blue gm-stroke-blue" stroke-width="1.5"/>
+      <text x="436" y="114" font-size="20" class="gm-text-blue">0</text>
+      <text x="526" y="112" font-size="20" class="gm-text-blue">1</text>
+      <text x="436" y="194" font-size="20" class="gm-text-blue">7</text>
+      <text x="530" y="194" font-size="20" class="gm-text-blue">4</text>
+      <text x="381" y="244" font-size="20" class="gm-text-blue">N(0, I)</text>
+      <text x="485" y="282" text-anchor="middle" font-size="20" class="gm-text-mute">이미지마다 작은 분포</text>
+    </g>
+    <g class="gm-step" data-step="4">
+      <g class="gm-jitter"><circle cx="478" cy="150" r="9" class="gm-fill-key"/></g>
+      <path d="M489,150 C540,150 570,150 608,150" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#gm-02-latent-space-karrow)"/>
+      <rect x="616" y="112" width="74" height="74" rx="10" class="gm-fill-panel gm-stroke-key" stroke-width="3"/>
+      <path d="M632,130 L674,130 L648,172 M640,152 L664,152" fill="none" class="gm-stroke-ink" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="653" y="214" text-anchor="middle" font-size="20" class="gm-text-key">새 숫자</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 오토인코더는 이미지 한 장을 잠재 공간의 점 하나로 압축합니다. 각 점은 학습 과정에서 정해진 위치에 흩어져 있고, 점과 점 사이는 비어 있습니다.</li>
+    <li>② 빈 영역에서 점을 골라 디코더에 넣으면 알아볼 수 없는 이미지가 나옵니다. 디코더가 그 영역을 학습한 적이 없기 때문입니다.</li>
+    <li>③ VAE는 이미지 한 장을 점이 아닌 작은 분포로 압축하고, 이 분포들이 표준정규분포 N(0, I) 안에서 서로 겹치도록 학습합니다.</li>
+    <li>④ 따라서 N(0, I)에서 아무 점이나 뽑아도 디코더가 학습한 영역에 속하므로 그럴듯한 새 이미지가 나옵니다.</li>
+  </ol>
+</figure>

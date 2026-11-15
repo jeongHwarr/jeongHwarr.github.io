@@ -1,5 +1,5 @@
 <figure class="gm-fig tex2jax_ignore" data-gm="steps">
-  <svg class="gm-svg" viewBox="0 0 720 280" role="img" aria-label="VAE가 이미지를 잠재 벡터로 압축하고, 잠재 공간을 정규분포 모양으로 정리한 뒤, 정규분포에서 뽑은 벡터를 디코더가 이미지로 만들지만 결과가 흐릿한 세 단계">
+  <svg class="gm-svg" viewBox="0 0 720 280" role="img" aria-label="VAE의 인코더가 이미지를 잠재 공간의 정규분포(평균과 분산)로 압축하고, 분포들이 표준정규분포 근처에 모인 뒤, 표준정규분포에서 뽑은 점을 디코더가 이미지로 만들지만 결과가 흐릿한 세 단계">
     <defs>
       <marker id="gm-02-vae-mechanism-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker>
       <filter id="gm-02-vae-mechanism-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter>
@@ -11,6 +11,7 @@
       <path d="M108,125 L126,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
       <polygon points="132,70 236,102 236,148 132,180" class="gm-tint-blue gm-stroke-blue" stroke-width="2"/>
       <text x="184" y="132" text-anchor="middle" font-size="20" class="gm-text-blue">인코더</text>
+      <text x="184" y="200" text-anchor="middle" font-size="20" class="gm-text-blue">평균 μ, 분산 σ²</text>
       <path d="M240,125 L268,125" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-vae-mechanism-arrow)"/>
     </g>
     <g class="gm-step" data-step="2">
@@ -35,8 +36,8 @@
     </g>
   </svg>
   <ol class="gm-caps">
-    <li>① 인코더가 이미지를 저차원 잠재 벡터로 압축합니다.</li>
-    <li>② 학습할 때 잠재 벡터들이 정규분포 모양으로 모이도록 함께 맞춥니다. 그래서 정규분포 안의 아무 점이나 그럴듯한 이미지에 대응합니다.</li>
-    <li>③ 정규분포에서 뽑은 점을 디코더가 이미지로 펼칩니다. 새 이미지는 만들어지지만 결과가 흐릿하게 나오는 경향이 있습니다.</li>
+    <li>① 인코더는 이미지를 받아 잠재 공간의 정규분포 하나를 나타내는 평균 μ와 분산 σ²을 출력합니다. 학습할 때는 이 분포에서 뽑은 잠재 벡터를 디코더에 넣어 원래 이미지로 복원합니다.</li>
+    <li>② 학습이 진행되면 이미지마다 만들어진 분포들이 표준정규분포 N(0, I) 근처에 모입니다.</li>
+    <li>③ 이미지를 생성할 때는 인코더를 사용하지 않습니다. N(0, I)에서 뽑은 점을 디코더에 넣으면 새 이미지가 만들어지지만, 결과가 흐릿한 경향이 있습니다.</li>
   </ol>
 </figure>
