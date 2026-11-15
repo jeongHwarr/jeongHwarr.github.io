@@ -1,5 +1,5 @@
 ---
-title: "[이미지 생성 모델 1] 생성 모델의 개념과 발전 과정"
+title: "[이미지 생성 모델] 1. 생성 모델의 개념과 발전 과정"
 description: "판별 모델과 생성 모델의 차이, 생성 모델이 이미지를 만드는 두 단계, VAE에서 Flow Matching까지 각 모델이 앞 모델의 한계를 어떻게 넘었는지 정리합니다."
 categories: [Generative AI, 이미지 생성 모델]
 tags: [Generative AI, VAE, GAN, Diffusion, Flow Matching]

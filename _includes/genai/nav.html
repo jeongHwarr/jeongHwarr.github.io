@@ -12,7 +12,9 @@
     <li class="{% if page.genai_no == i %}gm-here{% endif %}{% unless hit %} gm-unpub{% endunless %}">
       <span class="gm-no">{{ i }}</span>
       {%- if hit -%}
-        {%- assign short = hit.title | split: '] ' | last -%}
+        {%- comment -%} 제목 형식 "[이미지 생성 모델] N. 제목"에서 "제목"만 쓴다 {%- endcomment -%}
+        {%- assign gm_prefix = i | append: '. ' -%}
+        {%- assign short = hit.title | split: '] ' | last | remove_first: gm_prefix -%}
         {%- if page.genai_no == i -%}<span>{{ short }}</span>{%- else -%}<a href="{{ hit.url | relative_url }}">{{ short }}</a>{%- endif -%}
       {%- else -%}
         <span>{{ ep.title }} <span class="gm-soon">준비 중</span></span>

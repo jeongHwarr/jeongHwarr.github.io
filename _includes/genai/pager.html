@@ -5,8 +5,11 @@
   {%- if p.genai_no > page.genai_no and gm_next == nil -%}{%- assign gm_next = p -%}{%- endif -%}
 {%- endfor -%}
 {%- if gm_prev or gm_next -%}
+{%- comment -%} 제목 형식 "[이미지 생성 모델] N. 제목"에서 "제목"만 쓴다 {%- endcomment -%}
+{%- if gm_prev -%}{%- assign gm_pp = gm_prev.genai_no | append: '. ' -%}{%- assign gm_prev_t = gm_prev.title | split: '] ' | last | remove_first: gm_pp -%}{%- endif -%}
+{%- if gm_next -%}{%- assign gm_np = gm_next.genai_no | append: '. ' -%}{%- assign gm_next_t = gm_next.title | split: '] ' | last | remove_first: gm_np -%}{%- endif -%}
 <div class="gm-pager" data-toc-skip>
-  {%- if gm_prev -%}<a class="gm-prev" href="{{ gm_prev.url | relative_url }}">← {{ gm_prev.genai_no }}편 {{ gm_prev.title | split: '] ' | last }}</a>{%- endif -%}
-  {%- if gm_next -%}<a class="gm-next" href="{{ gm_next.url | relative_url }}">{{ gm_next.genai_no }}편 {{ gm_next.title | split: '] ' | last }} →</a>{%- endif -%}
+  {%- if gm_prev -%}<a class="gm-prev" href="{{ gm_prev.url | relative_url }}">← {{ gm_prev.genai_no }}편 {{ gm_prev_t }}</a>{%- endif -%}
+  {%- if gm_next -%}<a class="gm-next" href="{{ gm_next.url | relative_url }}">{{ gm_next.genai_no }}편 {{ gm_next_t }} →</a>{%- endif -%}
 </div>
 {%- endif -%}
