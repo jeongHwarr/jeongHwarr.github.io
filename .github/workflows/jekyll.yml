@@ -14,6 +14,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  # 예약 공개: Jekyll은 작성 시각(date)이 빌드 시각보다 미래인 글을 빼고 빌드한다.
+  # 매일 19:05(한국 시간, UTC 10:05)에 다시 빌드해 작성 시각이 지난 글을 공개한다.
+  schedule:
+    - cron: "5 10 * * *"
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
