@@ -1,0 +1,37 @@
+<figure class="gm-fig tex2jax_ignore" data-gm="steps">
+  <svg class="gm-svg" viewBox="0 0 720 270" role="img" aria-label="오토인코더의 인코더가 784차원 이미지를 32차원 잠재 벡터 z로 압축하고, 디코더가 z에서 원래 크기의 이미지를 복원하며, 복원한 이미지가 입력과 같아지도록 두 신경망을 함께 학습하는 세 단계">
+    <defs><marker id="gm-02-autoencoder-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="gm-fill-mute"/></marker></defs>
+    <g class="gm-step" data-step="1">
+      <rect x="84" y="95" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-mute" stroke-width="2"/>
+      <path d="M106,119 L152,119 L124,171" fill="none" class="gm-stroke-ink" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="129" y="214" text-anchor="middle" font-size="20" class="gm-text-ink">입력 x</text>
+      <text x="129" y="240" text-anchor="middle" font-size="20" class="gm-text-mute">784차원</text>
+      <path d="M178,140 L196,140" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-autoencoder-arrow)"/>
+      <polygon points="202,84 304,114 304,166 202,196" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+      <text x="253" y="147" text-anchor="middle" font-size="20" class="gm-text-ink">인코더</text>
+      <path d="M308,140 L336,140" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-autoencoder-arrow)"/>
+      <g class="gm-fill-mute"><rect x="346" y="108" width="26" height="14" rx="2" fill-opacity="0.9"/><rect x="346" y="125" width="26" height="14" rx="2" fill-opacity="0.45"/><rect x="346" y="142" width="26" height="14" rx="2" fill-opacity="0.7"/><rect x="346" y="159" width="26" height="14" rx="2" fill-opacity="0.3"/></g>
+      <text x="359" y="214" text-anchor="middle" font-size="20" class="gm-text-ink">잠재 벡터 z</text>
+      <text x="359" y="240" text-anchor="middle" font-size="20" class="gm-text-mute">32차원</text>
+    </g>
+    <g class="gm-step" data-step="2">
+      <path d="M380,140 L408,140" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-autoencoder-arrow)"/>
+      <polygon points="414,114 516,84 516,196 414,166" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+      <text x="465" y="147" text-anchor="middle" font-size="20" class="gm-text-ink">디코더</text>
+      <path d="M520,140 L538,140" class="gm-stroke-mute" stroke-width="3" marker-end="url(#gm-02-autoencoder-arrow)"/>
+      <rect x="544" y="95" width="90" height="90" rx="10" class="gm-fill-panel gm-stroke-ink" stroke-width="2"/>
+      <path d="M566,119 L612,119 L584,171" fill="none" class="gm-stroke-ink" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.8"/>
+      <text x="589" y="214" text-anchor="middle" font-size="20" class="gm-text-ink">복원 x̂</text>
+      <text x="589" y="240" text-anchor="middle" font-size="20" class="gm-text-mute">784차원</text>
+    </g>
+    <g class="gm-step" data-step="3">
+      <path d="M589,92 C589,42 129,42 129,92" fill="none" class="gm-stroke-key" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <text x="359" y="30" text-anchor="middle" font-size="20" class="gm-text-key">x̂와 x의 차이(복원 오차)를 줄이도록 학습</text>
+    </g>
+  </svg>
+  <ol class="gm-caps">
+    <li>① 인코더는 784차원 이미지를 32차원 잠재 벡터 z로 압축합니다. 차원이 크게 줄어드므로 복원에 필요한 핵심 특징만 z에 남습니다.</li>
+    <li>② 디코더는 z를 받아 입력과 같은 크기의 이미지 x̂로 복원합니다.</li>
+    <li>③ 복원한 이미지 x̂와 입력 x의 차이를 줄이도록 인코더와 디코더를 함께 학습합니다.</li>
+  </ol>
+</figure>
